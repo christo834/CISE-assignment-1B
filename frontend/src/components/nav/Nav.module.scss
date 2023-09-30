@@ -1,6 +1,13 @@
+.right {
+  display: flex !important; 
+  justify-content: flex-end;
+  width: 100%;
+}
+
 .navbar {
   display: flex;
-  position: relative;
+  // position: relative;
+
   top: 0;
   flex-direction: row;
   width: 100%;
@@ -54,8 +61,4 @@
   .dropdown_container {
     visibility: visible;
   }
-}
-
-.end {
-  margin-left: auto;
 }
