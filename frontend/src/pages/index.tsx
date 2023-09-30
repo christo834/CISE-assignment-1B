@@ -9,6 +9,8 @@ export default function Home() {
           Welcome to Speed, the number one place to analyse the validity of your
           scholarly articles.
         </p>
+        <p>Create an account to submit your articles.</p>
+        <button className="SignUp-btn">Sign Up</button>
       </div>
     </div>
   );

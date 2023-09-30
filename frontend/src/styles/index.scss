@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@700&display=swap');
 
+:root{
+    --Gab:'Gabario', sans-serif;
+}
+
 
 h1{
-    font-family: 'Gabario', sans-serif;
+    font-family: var(--Gab);
 }
 
 .container{
@@ -22,6 +26,23 @@ h1{
 }
 
 p{
-    font-family: 'Gabario', sans-serif;
+    font-family: var(--Gab);
     font-size:16px;
 }
+
+.SignUp-btn{
+    width: 10ch;
+    justify-content: center;
+    font-family: var(--Gab);
+    border-radius: 60px;
+    padding: 5px 10px;
+    font-size: 16px;
+    border: 2px solid white;
+    background-color: black;
+    color: white;
+}
+
+.SignUp-btn:hover{
+    background-color: rgb(57, 56, 56);
+    width: 15ch;
+}   
