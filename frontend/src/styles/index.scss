@@ -18,7 +18,7 @@ h1{
     margin: 0 auto;
     position:relative;
     top:50px;
-    background-color: darkblue;
+    background-color: rgb(29, 117, 222);
 }
 
 .container-within{
@@ -41,10 +41,10 @@ p{
     background-color: black;
     color: white;
     transition: transform 0.2s;
+    margin-bottom: 10px;
 }
 
 .SignUp-btn:hover{
     background-color: rgb(57, 56, 56);
-    // width: 15ch;
     transform: scale(1.05);
 }   
