@@ -21,13 +21,12 @@ let ArticleService = class ArticleService {
         this.articleModel = articleModel;
     }
     async insertArticle(title, authors, source, year, doi, claim, evidence) {
-        const lowCaseDoi = doi.toLowerCase();
         const newArticle = new this.articleModel({
             title,
             authors,
             source,
             year,
-            lowCaseDoi,
+            doi,
             claim,
             evidence
         });
@@ -35,8 +34,7 @@ let ArticleService = class ArticleService {
         return newArticle;
     }
     async getUser(doi) {
-        const lowCaseDoi = doi.toLowerCase();
-        const article = await this.articleModel.findOne({ lowCaseDoi });
+        const article = await this.articleModel.findOne({ doi });
         return article;
     }
     async findAll() {

@@ -11,13 +11,12 @@ export class ArticleService {
 
   //submit new article
   async insertArticle(title: string, authors: string, source: string, year: number, doi: string, claim: string, evidence: string) {
-    const lowCaseDoi = doi.toLowerCase();
     const newArticle = new this.articleModel({
       title,
       authors,
       source,
       year,
-      lowCaseDoi,
+      doi,
       claim,
       evidence
     });
@@ -27,8 +26,7 @@ export class ArticleService {
 
   //get one article, search via doi
   async getUser(doi: string) {
-    const lowCaseDoi = doi.toLowerCase();
-    const article = await this.articleModel.findOne({ lowCaseDoi });
+    const article = await this.articleModel.findOne({ doi });
     return article;
   }
 
