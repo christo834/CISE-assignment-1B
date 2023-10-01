@@ -1,36 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@700&display=swap');
 
-:root{
-    --Gab:'Gabario', sans-serif;
+:root {
+    --Gab: 'Gabario', sans-serif;
 }
 
 
-h1{
+h1 {
     font-family: var(--Gab);
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     width: 100%;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    position:relative;
-    top:50px;
+    position: relative;
+    top: 50px;
     background-color: rgb(29, 117, 222);
 }
 
-.container-within{
+.container-within {
     width: 120ch;
 }
 
-p{
+p {
     font-family: var(--Gab);
-    font-size:16px;
+    font-size: 16px;
 }
 
-.SignUp-btn{
+.SignUp-btn {
     width: 10ch;
     justify-content: center;
     font-family: var(--Gab);
@@ -44,7 +44,19 @@ p{
     margin-bottom: 10px;
 }
 
-.SignUp-btn:hover{
+.SignUp-btn:hover {
     background-color: rgb(57, 56, 56);
     transform: scale(1.05);
-}   
+}
+
+.AUT-section{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        position: relative;
+        top: 50px;
+        background-color: rgb(29, 117, 222);
+}
