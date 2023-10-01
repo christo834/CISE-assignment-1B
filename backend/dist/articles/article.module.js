@@ -20,7 +20,6 @@ exports.ArticleModule = ArticleModule = __decorate([
         imports: [mongoose_1.MongooseModule.forFeature([{ name: 'article', schema: article_schema_1.ArticleSchema }])],
         controllers: [article_controller_1.ArticleController],
         providers: [article_service_1.ArticleService],
-        exports: [article_service_1.ArticleService]
     })
 ], ArticleModule);
 //# sourceMappingURL=article.module.js.map

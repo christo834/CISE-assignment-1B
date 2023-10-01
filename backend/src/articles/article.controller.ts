@@ -41,7 +41,7 @@ export class ArticleController {
     };
   }
 
-  //vist website /heloo
+  //vist website /hello
   @Get('/hello')
   getHello(@Request() req): string {
     return 'hello';

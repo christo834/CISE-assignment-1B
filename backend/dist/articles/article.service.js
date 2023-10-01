@@ -17,12 +17,12 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 let ArticleService = class ArticleService {
-    constructor(postModel) {
-        this.postModel = postModel;
+    constructor(articleModel) {
+        this.articleModel = articleModel;
     }
     async insertArticle(title, authors, source, year, doi, claim, evidence) {
         const lowCaseDoi = doi.toLowerCase();
-        const newArticle = new this.postModel({
+        const newArticle = new this.articleModel({
             title,
             authors,
             source,
@@ -36,8 +36,11 @@ let ArticleService = class ArticleService {
     }
     async getUser(doi) {
         const lowCaseDoi = doi.toLowerCase();
-        const article = await this.postModel.findOne({ lowCaseDoi });
+        const article = await this.articleModel.findOne({ lowCaseDoi });
         return article;
+    }
+    async findAll() {
+        return this.articleModel.find().exec();
     }
 };
 exports.ArticleService = ArticleService;

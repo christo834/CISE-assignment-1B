@@ -8,6 +8,5 @@ import { ArticleService } from './article.service';
   imports: [MongooseModule.forFeature([{ name: 'article', schema: ArticleSchema }])],
   controllers: [ArticleController],
   providers: [ArticleService],
-  exports: [ArticleService]
 })
 export class ArticleModule {}
