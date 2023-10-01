@@ -4,7 +4,6 @@
     --Gab: 'Gabario', sans-serif;
 }
 
-
 h1 {
     font-family: var(--Gab);
 }
@@ -57,6 +56,12 @@ p {
         align-items: center;
         margin: 0 auto;
         position: relative;
+        min-height: 300px;
         top: 50px;
-        background-color: rgb(29, 117, 222);
+        background-color: rgb(247, 82, 6);
+}
+
+.AUT-link{
+    color:white;
+    margin-left: 5px;
 }
