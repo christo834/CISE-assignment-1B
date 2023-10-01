@@ -29,6 +29,11 @@ export default function Home() {
               </a>
             </p>
           </div>
+          <div className="apa-ref-container">
+            <div className="home-guideline-design">
+              <h1>REFERENCING AND APA</h1>
+            </div>
+          </div>
         </div>
       </div>
     </div>
