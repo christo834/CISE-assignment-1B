@@ -7,9 +7,10 @@ export const ArticleSchema = new mongoose.Schema({
         unique: true
     },
     authors: {
-        type: String,
-        required: true
-    },
+      type: [String],
+      required: true
+  },
+  
     source: {
       type: String,
       required: true

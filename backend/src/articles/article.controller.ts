@@ -17,7 +17,7 @@ export class ArticleController {
   @Post('/submit')
   async addArticle(
     @Body('title') title: string,
-    @Body('authors') authors: string,
+    @Body('authors') authors: string[],
     @Body('source') source: string,
     @Body('year') year: number,
     @Body('doi') doi: string,

@@ -10,7 +10,7 @@ export class ArticleService {
   
 
   //submit new article
-  async insertArticle(title: string, authors: string, source: string, year: number, doi: string, claim: string, evidence: string) {
+  async insertArticle(title: string, authors: string[], source: string, year: number, doi: string, claim: string, evidence: string) {
     const newArticle = new this.articleModel({
       title,
       authors,
