@@ -21,8 +21,8 @@ export class ArticleController {
     @Body('source') source: string,
     @Body('year') year: number,
     @Body('doi') doi: string,
-    @Body('claim') claim: string,
-    @Body('evidence') evidence: string,
+    @Body('summary') summary: string,
+  
   ) 
   {
     const result = await this.articleService.insertArticle(
@@ -31,8 +31,7 @@ export class ArticleController {
       source,
       year,
       doi,
-      claim,
-      evidence
+      summary
     );
     return {
       msg: 'Article is submited successfully into database',

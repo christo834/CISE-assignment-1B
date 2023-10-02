@@ -28,9 +28,9 @@ const NewDiscussion = () => {
           title,
           authors,
           source,
-          publication_year: pubYear,
+          year: pubYear,
           doi,
-          summary,
+          summary
           //linked_discussion: linkedDiscussion,
         }),
       });

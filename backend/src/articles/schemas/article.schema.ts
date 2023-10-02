@@ -23,11 +23,7 @@ export const ArticleSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    claim: {
-      type: String,
-      required: true
-    },
-    evidence: {
+    summary: {
       type: String,
       required: true
     }
@@ -42,6 +38,5 @@ export interface Article extends mongoose.Document {
     source: string;
     year: number;
     doi: string;
-    claim: string;
-    evidence: string;
+    summary: string;
 }

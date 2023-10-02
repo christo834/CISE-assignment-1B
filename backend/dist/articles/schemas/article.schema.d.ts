@@ -6,34 +6,31 @@ export declare const ArticleSchema: mongoose.Schema<any, mongoose.Model<any, any
     updatedAt: NativeDate;
 } & {
     title: string;
-    authors: string;
+    authors: string[];
     source: string;
     year: number;
     doi: string;
-    claim: string;
-    evidence: string;
+    summary: string;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     title: string;
-    authors: string;
+    authors: string[];
     source: string;
     year: number;
     doi: string;
-    claim: string;
-    evidence: string;
+    summary: string;
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     title: string;
-    authors: string;
+    authors: string[];
     source: string;
     year: number;
     doi: string;
-    claim: string;
-    evidence: string;
+    summary: string;
 }> & {
     _id: mongoose.Types.ObjectId;
 }>;
@@ -44,6 +41,5 @@ export interface Article extends mongoose.Document {
     source: string;
     year: number;
     doi: string;
-    claim: string;
-    evidence: string;
+    summary: string;
 }

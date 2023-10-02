@@ -9,7 +9,7 @@ exports.ArticleSchema = new mongoose.Schema({
         unique: true
     },
     authors: {
-        type: String,
+        type: [String],
         required: true
     },
     source: {
@@ -24,11 +24,7 @@ exports.ArticleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    claim: {
-        type: String,
-        required: true
-    },
-    evidence: {
+    summary: {
         type: String,
         required: true
     }
