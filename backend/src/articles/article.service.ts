@@ -45,4 +45,15 @@ export class ArticleService {
     const article = await this.articleModel.findOne({ title });
     return article;
   }
+
+  //get articles by year range
+  async getArticlesByYearRange(
+    startYear: number,
+    endYear: number,
+  ): Promise<Article[]> {
+    const articles = await this.articleModel
+      .find({ year: { $gte: startYear, $lte: endYear } })
+      .exec();
+    return articles;
+  }
 }
