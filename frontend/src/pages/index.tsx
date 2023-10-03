@@ -1,8 +1,10 @@
+import ArticleDetails from "@/components/Search";
 import "../styles/index.scss";
 
 export default function Home() {
   return (
     <div>
+      <ArticleDetails />
       <div className="container">
         <div className="container-within">
           <h1>Software Practice Empirical Evidence Database (SPEED)</h1>
