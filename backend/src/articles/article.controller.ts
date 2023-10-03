@@ -60,4 +60,26 @@ export class ArticleController {
       };
     }
   }
+
+  //get articles by year range
+  @Get('/year/:startYear/:endYear')
+  async getArticlesByYearRange(
+    @Param('startYear') startYear: number,
+    @Param('endYear') endYear: number,
+  ) {
+    const articles = await this.articleService.getArticlesByYearRange(
+      startYear,
+      endYear,
+    );
+    if (articles.length > 0) {
+      return {
+        msg: 'Articles found successfully',
+        articles: articles,
+      };
+    } else {
+      return {
+        msg: 'No articles found for the provided year range',
+      };
+    }
+  }
 }
