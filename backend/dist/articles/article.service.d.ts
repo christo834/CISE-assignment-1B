@@ -25,13 +25,28 @@
 import { Model } from 'mongoose';
 import { Article } from './schemas/article.schema';
 export declare class ArticleService {
-    private readonly articleModel;
-    constructor(articleModel: Model<Article>);
-    insertArticle(title: string, authors: string[], source: string, year: number, doi: string, summary: string): Promise<import("mongoose").Document<unknown, {}, Article> & Article & Required<{
+  private readonly articleModel;
+  constructor(articleModel: Model<Article>);
+  insertArticle(
+    title: string,
+    authors: string[],
+    source: string,
+    year: number,
+    doi: string,
+    summary: string,
+  ): Promise<
+    import('mongoose').Document<unknown, {}, Article> &
+      Article &
+      Required<{
         _id: string;
-    }>>;
-    getUser(doi: string): Promise<import("mongoose").Document<unknown, {}, Article> & Article & Required<{
+      }>
+  >;
+  getUser(doi: string): Promise<
+    import('mongoose').Document<unknown, {}, Article> &
+      Article &
+      Required<{
         _id: string;
-    }>>;
-    findAll(): Promise<Article[]>;
+      }>
+  >;
+  findAll(): Promise<Article[]>;
 }

@@ -22,21 +22,19 @@ export class ArticleController {
     @Body('year') year: number,
     @Body('doi') doi: string,
     @Body('summary') summary: string,
-  
-  ) 
-  {
+  ) {
     const result = await this.articleService.insertArticle(
       title,
       authors,
       source,
       year,
       doi,
-      summary
+      summary,
     );
     return {
       msg: 'Article is submited successfully into database',
       articleId: result.id,
-      articleTitle: result.title
+      articleTitle: result.title,
     };
   }
 
@@ -44,6 +42,5 @@ export class ArticleController {
   @Get('/hello')
   getHello(@Request() req): string {
     return 'hello';
-  };
-  
+  }
 }

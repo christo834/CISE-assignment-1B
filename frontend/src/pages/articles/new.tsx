@@ -1,6 +1,6 @@
 import { FormEvent, useState, useEffect } from "react";
 import formStyles from "../../styles/Form.module.scss";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 const NewDiscussion = () => {
   const [title, setTitle] = useState("");
@@ -11,7 +11,6 @@ const NewDiscussion = () => {
   const [summary, setSummary] = useState("");
   const [linkedDiscussion, setLinkedDiscussion] = useState("");
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
-
 
   const submitNewArticle = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,7 +29,7 @@ const NewDiscussion = () => {
           source,
           year: pubYear,
           doi,
-          summary
+          summary,
           //linked_discussion: linkedDiscussion,
         }),
       });
@@ -51,7 +50,9 @@ const NewDiscussion = () => {
     } catch (error) {
       console.error("Error occurred:", error);
       await swal("Error", "Please try again", "error");
-      await setResponseMessage("An error occurred while submitting the article.");
+      await setResponseMessage(
+        "An error occurred while submitting the article.",
+      );
       // Handle network or other errors here
     }
 
@@ -64,7 +65,7 @@ const NewDiscussion = () => {
         doi,
         summary,
         linked_discussion: linkedDiscussion,
-      })
+      }),
     );
   };
   // Some helper methods for the authors array
@@ -78,7 +79,7 @@ const NewDiscussion = () => {
     setAuthors(
       authors.map((oldValue, i) => {
         return index === i ? value : oldValue;
-      })
+      }),
     );
   };
   // Return the full form
