@@ -1,5 +1,7 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import formStyles from "../../styles/Form.module.scss";
+import swal from 'sweetalert';
+
 const NewDiscussion = () => {
   const [title, setTitle] = useState("");
   const [authors, setAuthors] = useState<string[]>([]);
@@ -8,8 +10,51 @@ const NewDiscussion = () => {
   const [doi, setDoi] = useState("");
   const [summary, setSummary] = useState("");
   const [linkedDiscussion, setLinkedDiscussion] = useState("");
+  const [responseMessage, setResponseMessage] = useState<string | null>(null);
+
+
   const submitNewArticle = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    event.preventDefault();
+    // Your fetch logic here
+    try {
+      const response = await fetch("http://localhost:8000/article/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          authors,
+          source,
+          year: pubYear,
+          doi,
+          summary
+          //linked_discussion: linkedDiscussion,
+        }),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        await setResponseMessage(responseData.message);
+        await swal("Submitted", "Article submitted successfully", "success");
+        console.log("Article submitted successfully");
+        // You can also reset form fields or perform other actions here
+      } else {
+        const errorData = await response.json();
+        await setResponseMessage(errorData.message);
+        await swal("Failed", "Article submission unsuccessful", "error");
+        console.error("Failed to submit article");
+        // Handle the error here
+      }
+    } catch (error) {
+      console.error("Error occurred:", error);
+      await swal("Error", "Please try again", "error");
+      await setResponseMessage("An error occurred while submitting the article.");
+      // Handle network or other errors here
+    }
+
     console.log(
       JSON.stringify({
         title,
