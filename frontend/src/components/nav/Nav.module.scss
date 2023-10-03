@@ -1,10 +1,84 @@
-.right {
-  display: flex !important;
-  margin-left: auto;
+@media screen and (max-width: 650px) {
+  .right {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    flex-direction: column;
+    z-index: 99;
+  }
+  .navbar {
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+    top: 0;
+    flex-direction: row;
+    background-color: darkblue;
+    align-items: center;
+    color: aliceblue;
+    font-size: 1.5em;
+    font-weight: bold;
+    transition: top 0.5s;
+    height: fit-content;
+  }
+
+  .hide {
+    top: -3em;
+  }
+
+  .navitem {
+    position: relative;
+    padding: 1em;
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: default;
+    white-space: nowrap;
+  }
+
+  .clickable:hover {
+    backdrop-filter: brightness(50%);
+  }
+
+  .dropdown_container {
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: darkblue;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 99;
+  }
+
+  .dropdown:hover {
+    cursor: pointer;
+    backdrop-filter: brightness(50%);
+
+    .dropdown_container {
+      visibility: visible;
+    }
+  }
+
+  .menuContainer {
+    position: relative;
+    margin-left: auto;
+    padding-right: 20px;
+  }
+
+  .menuContainer > svg {
+    font-size: 60px;
+  }
+
+  .menuIcon {
+    visibility: visible;
+    margin-left: auto;
+    font-size: 40px;
+    padding-right: 0px;
+  }
 }
 
 .navbar {
-  box-sizing: border-box;
   display: flex;
   position: relative;
   top: 0;
@@ -18,10 +92,6 @@
   height: fit-content;
 }
 
-.hide {
-  top: -3em;
-}
-
 .navitem {
   position: relative;
   padding: 1em;
@@ -31,13 +101,13 @@
   align-items: center;
   cursor: default;
   white-space: nowrap;
-  z-index: 200;
 }
 
 .clickable {
   @extend .navitem;
   cursor: pointer;
   background-color: darkblue;
+  z-index: 100;
 }
 
 .clickable:hover {
@@ -52,6 +122,7 @@
   position: absolute;
   top: 100%;
   right: 0;
+  z-index: 300;
 }
 
 .dropdown:hover {
@@ -61,4 +132,19 @@
   .dropdown_container {
     visibility: visible;
   }
+}
+
+.right {
+  display: flex;
+  margin-left: auto;
+}
+
+@media screen and (min-width: 650px) {
+  .menuIcon {
+    display: none;
+  }
+}
+
+.dropdown_container {
+  z-index: 20;
 }
