@@ -33,7 +33,7 @@ let ArticleController = class ArticleController {
 };
 exports.ArticleController = ArticleController;
 __decorate([
-    (0, common_1.Post)('/submit'),
+    (0, common_1.Get)('/submit'),
     __param(0, (0, common_1.Body)('title')),
     __param(1, (0, common_1.Body)('authors')),
     __param(2, (0, common_1.Body)('source')),
@@ -45,7 +45,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ArticleController.prototype, "addArticle", null);
 __decorate([
-    (0, common_1.Get)('/hello'),
+    (0, common_1.Post)('/hello'),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),

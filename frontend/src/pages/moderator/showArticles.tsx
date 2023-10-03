@@ -2,12 +2,24 @@ import swal from "sweetalert";
 import React, { useState, useEffect } from 'react';
 
 interface Item {
-    title: string,
-    authors: string[],
-    source: string,
-    year: number,
-    doi: string,
-    summary: string,
+    title: {
+      type: String
+    },
+    authors: {
+      type: String[]
+    },
+    source: {
+      type: String
+    },
+    year: {
+      type: Number
+    },
+    doi: {
+      type: String
+    },
+    summary: {
+      type: String
+    }
 }
 
 const ModeratorArticles = () => {

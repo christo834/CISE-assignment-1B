@@ -14,7 +14,7 @@ export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
   //visit website /submit
-  @Post('/submit')
+  @Get('/submit')
   async addArticle(
     @Body('title') title: string,
     @Body('authors') authors: string[],
@@ -39,7 +39,7 @@ export class ArticleController {
   }
 
   //vist website /hello
-  @Get('/hello')
+  @Post('/hello')
   getHello(@Request() req): string {
     return 'hello';
   }
