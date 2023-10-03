@@ -5,6 +5,7 @@ import {
   Post,
   UseGuards,
   Request,
+  Param,
 } from '@nestjs/common';
 
 import { ArticleService } from './article.service';
@@ -22,21 +23,19 @@ export class ArticleController {
     @Body('year') year: number,
     @Body('doi') doi: string,
     @Body('summary') summary: string,
-  
-  ) 
-  {
+  ) {
     const result = await this.articleService.insertArticle(
       title,
       authors,
       source,
       year,
       doi,
-      summary
+      summary,
     );
     return {
       msg: 'Article is submited successfully into database',
       articleId: result.id,
-      articleTitle: result.title
+      articleTitle: result.title,
     };
   }
 
@@ -44,6 +43,21 @@ export class ArticleController {
   @Get('/hello')
   getHello(@Request() req): string {
     return 'hello';
-  };
-  
+  }
+
+  //get one article, search via title
+  @Get('/title/:title')
+  async getArticleByTitle(@Param('title') title: string) {
+    const article = await this.articleService.getArticleByTitle(title);
+    if (article) {
+      return {
+        msg: 'Article found successfully',
+        article: article,
+      };
+    } else {
+      return {
+        msg: 'No article found with the provided title',
+      };
+    }
+  }
 }
