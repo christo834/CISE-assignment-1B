@@ -24,13 +24,40 @@ let ArticleController = class ArticleController {
         return {
             msg: 'Article is submited successfully into database',
             articleId: result.id,
-            articleTitle: result.title
+            articleTitle: result.title,
         };
     }
     getHello(req) {
         return 'hello';
     }
-    ;
+    async getArticleByTitle(title) {
+        const article = await this.articleService.getArticleByTitle(title);
+        if (article) {
+            return {
+                msg: 'Article found successfully',
+                article: article,
+            };
+        }
+        else {
+            return {
+                msg: 'No article found with the provided title',
+            };
+        }
+    }
+    async getArticlesByYearRange(startYear, endYear) {
+        const articles = await this.articleService.getArticlesByYearRange(startYear, endYear);
+        if (articles.length > 0) {
+            return {
+                msg: 'Articles found successfully',
+                articles: articles,
+            };
+        }
+        else {
+            return {
+                msg: 'No articles found for the provided year range',
+            };
+        }
+    }
 };
 exports.ArticleController = ArticleController;
 __decorate([
@@ -52,6 +79,21 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", String)
 ], ArticleController.prototype, "getHello", null);
+__decorate([
+    (0, common_1.Get)('/title/:title'),
+    __param(0, (0, common_1.Param)('title')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], ArticleController.prototype, "getArticleByTitle", null);
+__decorate([
+    (0, common_1.Get)('/year/:startYear/:endYear'),
+    __param(0, (0, common_1.Param)('startYear')),
+    __param(1, (0, common_1.Param)('endYear')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", Promise)
+], ArticleController.prototype, "getArticlesByYearRange", null);
 exports.ArticleController = ArticleController = __decorate([
     (0, common_1.Controller)('article'),
     __metadata("design:paramtypes", [article_service_1.ArticleService])
