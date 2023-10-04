@@ -38,6 +38,7 @@
   height: 2rem;
   flex-grow: 0;
   font-size: 1em;
+  background-color: white;
 }
 
 .submitBtn {
@@ -55,4 +56,9 @@
 
 .headerTitle {
   color: white;
+}
+
+.articleFont {
+  font-size: 2rem;
+  margin-top: 10px;
 }
