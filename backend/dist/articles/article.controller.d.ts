@@ -25,6 +25,7 @@
 /// <reference types="mongoose/types/inferschematype" />
 import { ArticleService } from './article.service';
 export declare class ArticleController {
+
     private readonly articleService;
     constructor(articleService: ArticleService);
     addArticle(title: string, authors: string[], source: string, year: number, doi: string, summary: string): Promise<{
@@ -49,4 +50,5 @@ export declare class ArticleController {
         msg: string;
         articles?: undefined;
     }>;
+
 }

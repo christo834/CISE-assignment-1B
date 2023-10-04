@@ -19,14 +19,14 @@
     "sweetalert": "^2.1.2"
   },
   "devDependencies": {
-    "@types/node": "latest",
-    "@types/react": "latest",
+    "@types/node": "20.8.2",
+    "@types/react": "18.2.24",
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "postcss": "latest",
     "tailwindcss": "latest",
-    "typescript": "latest"
+    "typescript": "5.2.2"
   }
 }

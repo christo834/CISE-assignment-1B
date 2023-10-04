@@ -40,6 +40,7 @@ export class ArticleService {
   async findAll(): Promise<Article[]> {
     return this.articleModel.find().exec();
   }
+
   //get one article, search via title
   async getArticleByTitle(title: string) {
     const article = await this.articleModel.findOne({ title });
@@ -57,3 +58,4 @@ export class ArticleService {
     return articles;
   }
 }
+

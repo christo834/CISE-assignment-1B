@@ -1,2 +1,1 @@
-export declare class Post {
-}
+export declare class Post {}

@@ -51,7 +51,9 @@ const NewDiscussion = () => {
       console.error("Error occurred:", error);
       await swal("Error", "Please try again", "error");
       await setResponseMessage(
+
         "An error occurred while submitting the article."
+
       );
       // Handle network or other errors here
     }
@@ -65,7 +67,7 @@ const NewDiscussion = () => {
         doi,
         summary,
         linked_discussion: linkedDiscussion,
-      })
+      }),
     );
   };
   // Some helper methods for the authors array
@@ -79,7 +81,7 @@ const NewDiscussion = () => {
     setAuthors(
       authors.map((oldValue, i) => {
         return index === i ? value : oldValue;
-      })
+      }),
     );
   };
   // Return the full form
