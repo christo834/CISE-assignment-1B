@@ -86,7 +86,7 @@ const NewDiscussion = () => {
   return (
     <div className={formStyles.container}>
       <div className={formStyles.headerTitle}>
-        <h1 className={formStyles.articleFont}>New Article</h1>
+        <h1>New Article</h1>
       </div>
       <form className={formStyles.form} onSubmit={submitNewArticle}>
         <label htmlFor="title" className={formStyles.labelTitle}>
