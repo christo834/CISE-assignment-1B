@@ -34,4 +34,8 @@ export declare class ArticleService {
         _id: string;
     }>>;
     findAll(): Promise<Article[]>;
+    getArticleByTitle(title: string): Promise<import("mongoose").Document<unknown, {}, Article> & Article & Required<{
+        _id: string;
+    }>>;
+    getArticlesByYearRange(startYear: number, endYear: number): Promise<Article[]>;
 }
