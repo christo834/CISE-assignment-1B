@@ -1,3 +1,4 @@
+//Imports required for the controller
 import {
   Body,
   Controller,
@@ -7,14 +8,16 @@ import {
   Request,
 } from '@nestjs/common';
 
-import { ArticleService } from './article.service';
+import { ArticleService } from './article.service';   //Importing Article Service function from article.service.ts
 
+//Start of ArticleController
 @Controller('article')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
   //visit website /submit
   @Get('/submit')
+  //Async function for adding articles in the database
   async addArticle(
     @Body('title') title: string,
     @Body('authors') authors: string[],
@@ -23,6 +26,8 @@ export class ArticleController {
     @Body('doi') doi: string,
     @Body('summary') summary: string,
   ) {
+
+    //Storing the results into premade variables
     const result = await this.articleService.insertArticle(
       title,
       authors,
@@ -31,6 +36,8 @@ export class ArticleController {
       doi,
       summary,
     );
+
+    //Returning message if article was successfully submitted
     return {
       msg: 'Article is submited successfully into database',
       articleId: result.id,
@@ -38,6 +45,7 @@ export class ArticleController {
     };
   }
 
+  //Test for checking if @Get works (changed to @Post to make addArticle /submit API work)
   //vist website /hello
   @Post('/hello')
   getHello(@Request() req): string {
