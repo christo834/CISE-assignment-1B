@@ -51,7 +51,9 @@ const NewDiscussion = () => {
       console.error("Error occurred:", error);
       await swal("Error", "Please try again", "error");
       await setResponseMessage(
-        "An error occurred while submitting the article.",
+
+        "An error occurred while submitting the article."
+
       );
       // Handle network or other errors here
     }
@@ -84,10 +86,14 @@ const NewDiscussion = () => {
   };
   // Return the full form
   return (
-    <div className="container">
-      <h1>New Article</h1>
+    <div className={formStyles.container}>
+      <div className={formStyles.headerTitle}>
+        <h1>New Article</h1>
+      </div>
       <form className={formStyles.form} onSubmit={submitNewArticle}>
-        <label htmlFor="title">Title:</label>
+        <label htmlFor="title" className={formStyles.labelTitle}>
+          Title:
+        </label>
         <input
           className={formStyles.formItem}
           type="text"
@@ -98,7 +104,9 @@ const NewDiscussion = () => {
             setTitle(event.target.value);
           }}
         />
-        <label htmlFor="author">Authors:</label>
+        <label htmlFor="author" className={formStyles.labelTitle}>
+          Authors:
+        </label>
         {authors.map((author, index) => {
           return (
             <div key={`author ${index}`} className={formStyles.arrayItem}>
@@ -128,7 +136,9 @@ const NewDiscussion = () => {
         >
           +
         </button>
-        <label htmlFor="source">Source:</label>
+        <label htmlFor="source" className={formStyles.labelTitle}>
+          Source:
+        </label>
         <input
           className={formStyles.formItem}
           type="text"
@@ -139,7 +149,9 @@ const NewDiscussion = () => {
             setSource(event.target.value);
           }}
         />
-        <label htmlFor="pubYear">Publication Year:</label>
+        <label htmlFor="pubYear" className={formStyles.labelTitle}>
+          Publication Year:
+        </label>
         <input
           className={formStyles.formItem}
           type="number"
@@ -155,7 +167,9 @@ const NewDiscussion = () => {
             }
           }}
         />
-        <label htmlFor="doi">DOI:</label>
+        <label htmlFor="doi" className={formStyles.labelTitle}>
+          DOI:
+        </label>
         <input
           className={formStyles.formItem}
           type="text"
@@ -166,14 +180,16 @@ const NewDiscussion = () => {
             setDoi(event.target.value);
           }}
         />
-        <label htmlFor="summary">Summary:</label>
+        <label htmlFor="summary" className={formStyles.labelTitle}>
+          Summary:
+        </label>
         <textarea
           className={formStyles.formTextArea}
           name="summary"
           value={summary}
           onChange={(event) => setSummary(event.target.value)}
         />
-        <button className={formStyles.formItem} type="submit">
+        <button className={formStyles.submitBtn} type="submit">
           Submit
         </button>
       </form>

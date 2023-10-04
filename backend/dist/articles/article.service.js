@@ -37,28 +37,40 @@ const common_1 = require('@nestjs/common');
 const mongoose_1 = require('@nestjs/mongoose');
 const mongoose_2 = require('mongoose');
 let ArticleService = class ArticleService {
-  constructor(articleModel) {
-    this.articleModel = articleModel;
-  }
-  async insertArticle(title, authors, source, year, doi, summary) {
-    const newArticle = new this.articleModel({
-      title,
-      authors,
-      source,
-      year,
-      doi,
-      summary,
-    });
-    await newArticle.save();
-    return newArticle;
-  }
-  async getUser(doi) {
-    const article = await this.articleModel.findOne({ doi });
-    return article;
-  }
-  async findAll() {
-    return this.articleModel.find().exec();
-  }
+
+    constructor(articleModel) {
+        this.articleModel = articleModel;
+    }
+    async insertArticle(title, authors, source, year, doi, summary) {
+        const newArticle = new this.articleModel({
+            title,
+            authors,
+            source,
+            year,
+            doi,
+            summary,
+        });
+        await newArticle.save();
+        return newArticle;
+    }
+    async getUser(doi) {
+        const article = await this.articleModel.findOne({ doi });
+        return article;
+    }
+    async findAll() {
+        return this.articleModel.find().exec();
+    }
+    async getArticleByTitle(title) {
+        const article = await this.articleModel.findOne({ title });
+        return article;
+    }
+    async getArticlesByYearRange(startYear, endYear) {
+        const articles = await this.articleModel
+            .find({ year: { $gte: startYear, $lte: endYear } })
+            .exec();
+        return articles;
+    }
+
 };
 exports.ArticleService = ArticleService;
 exports.ArticleService = ArticleService = __decorate(

@@ -5,6 +5,7 @@ import {
   Post,
   UseGuards,
   Request,
+  Param,
 } from '@nestjs/common';
 
 import { ArticleService } from './article.service';
@@ -43,4 +44,44 @@ export class ArticleController {
   getHello(@Request() req): string {
     return 'hello';
   }
+
+
+  //get one article, search via title
+  @Get('/title/:title')
+  async getArticleByTitle(@Param('title') title: string) {
+    const article = await this.articleService.getArticleByTitle(title);
+    if (article) {
+      return {
+        msg: 'Article found successfully',
+        article: article,
+      };
+    } else {
+      return {
+        msg: 'No article found with the provided title',
+      };
+    }
+  }
+
+  //get articles by year range
+  @Get('/year/:startYear/:endYear')
+  async getArticlesByYearRange(
+    @Param('startYear') startYear: number,
+    @Param('endYear') endYear: number,
+  ) {
+    const articles = await this.articleService.getArticlesByYearRange(
+      startYear,
+      endYear,
+    );
+    if (articles.length > 0) {
+      return {
+        msg: 'Articles found successfully',
+        articles: articles,
+      };
+    } else {
+      return {
+        msg: 'No articles found for the provided year range',
+      };
+    }
+  }
 }
+
