@@ -4,7 +4,7 @@ module.exports = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://cise-assignment-1-b-qnho.vercel.app/api/:path*',
+        destination: 'https://cise-backend-murex.vercel.app/api/:path*',
       },
     ]
   },
