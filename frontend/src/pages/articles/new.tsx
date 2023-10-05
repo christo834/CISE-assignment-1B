@@ -18,7 +18,7 @@ const NewDiscussion = () => {
     event.preventDefault();
     // Your fetch logic here
     try {
-      const response = await fetch("https://cise-backend-murex.vercel.app/article/article/submit", {
+      const response = await fetch("https://cise-backend-murex.vercel.app/article/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
