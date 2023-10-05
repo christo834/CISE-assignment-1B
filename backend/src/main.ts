@@ -6,7 +6,7 @@ import * as dotenv from 'dotenv';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'https://vercel.com/gxc1998github/cise-frontend/2N5nYhsb2WUsD4r35duq9RseQuQn', 
+    origin: 'https://cise-frontend-h8i1dzse9-gxc1998github.vercel.app', 
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
