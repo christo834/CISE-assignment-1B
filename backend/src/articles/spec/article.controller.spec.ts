@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ArticleController } from '../article.controller';
 import { ArticleService } from '../article.service';
 
-describe('PostsController', () => {
+describe('ArticleController', () => {
   let controller: ArticleController;
 
   beforeEach(async () => {
