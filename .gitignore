@@ -12,8 +12,8 @@
 /.next/
 /out/
 
-#nest.js
-/dist
+# nest.js
+/backend/dist
 
 # production
 /build
