@@ -8,16 +8,32 @@ import { Article } from './schemas/article.schema';
 export class ArticleService {
   constructor(@InjectModel('article') private readonly articleModel: Model<Article>) {}
   
-
   //submit new article
-  async insertArticle(title: string, authors: string[], source: string, year: number, doi: string, summary: string) {
+  async insertArticle(
+    title: string,
+    authors: string[],
+    source: string,
+    year: number,
+    doi: string,
+    summary: string,
+    claim: string,
+    evidence_level: string[],
+    se_methods: string[],
+    moderated: boolean,
+    analysed: boolean)
+  {
     const newArticle = new this.articleModel({
       title,
       authors,
       source,
       year,
       doi,
-      summary
+      summary,
+      claim,
+      evidence_level,
+      se_methods,
+      moderated,
+      analysed,
     });
     await newArticle.save();
     return newArticle;

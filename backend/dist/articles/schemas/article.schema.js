@@ -27,6 +27,26 @@ exports.ArticleSchema = new mongoose.Schema({
     summary: {
         type: String,
         required: true
+    },
+    claim: {
+        type: String,
+        required: true
+    },
+    evidence_level: {
+        type: [String],
+        required: true
+    },
+    se_methods: {
+        type: [String],
+        required: true
+    },
+    moderated: {
+        type: Boolean,
+        required: true
+    },
+    analysed: {
+        type: Boolean,
+        required: true
     }
 }, { timestamps: true });
 //# sourceMappingURL=article.schema.js.map

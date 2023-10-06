@@ -9,8 +9,7 @@ export const ArticleSchema = new mongoose.Schema({
     authors: {
       type: [String],
       required: true
-  },
-  
+    },
     source: {
       type: String,
       required: true
@@ -26,7 +25,28 @@ export const ArticleSchema = new mongoose.Schema({
     summary: {
       type: String,
       required: true
+    },
+    claim: {
+      type: String,
+      required: false
+    },
+    evidence_level: {
+      type: [String],
+      required: false
+    },
+    se_methods: {
+      type: [String],
+      required: false
+    },
+    moderated: {
+      type: Boolean,
+      required: false
+    },
+    analysed: {
+      type: Boolean,
+      required: false
     }
+
 
 }, { timestamps: true });
 
@@ -39,4 +59,9 @@ export interface Article extends mongoose.Document {
     year: number;
     doi: string;
     summary: string;
+    claim: string;
+    evidence_level: string;
+    se_methods: string;
+    moderated: boolean;
+    analysed: boolean;
 }

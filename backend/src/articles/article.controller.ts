@@ -13,7 +13,7 @@ import { ArticleService } from './article.service';
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
-  //visit website /submit
+  //visit http://localhost:8000/article/submit
   @Post('/submit')
   async addArticle(
     @Body('title') title: string,
@@ -22,7 +22,11 @@ export class ArticleController {
     @Body('year') year: number,
     @Body('doi') doi: string,
     @Body('summary') summary: string,
-  
+    @Body('claim') claim: string,
+    @Body('evidence_leve') evidence_level: string[],
+    @Body('se_methods') se_methods: string[],
+    @Body('moderated') moderated: boolean,
+    @Body('analysed') analysed: boolean,
   ) 
   {
     const result = await this.articleService.insertArticle(
@@ -31,7 +35,12 @@ export class ArticleController {
       source,
       year,
       doi,
-      summary
+      summary,
+      claim,
+      evidence_level,
+      se_methods,
+      moderated,
+      analysed
     );
     return {
       msg: 'Article is submited successfully into database',

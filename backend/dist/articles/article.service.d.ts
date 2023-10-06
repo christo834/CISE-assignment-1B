@@ -27,7 +27,7 @@ import { Article } from './schemas/article.schema';
 export declare class ArticleService {
     private readonly articleModel;
     constructor(articleModel: Model<Article>);
-    insertArticle(title: string, authors: string[], source: string, year: number, doi: string, summary: string): Promise<import("mongoose").Document<unknown, {}, Article> & Article & Required<{
+    insertArticle(title: string, authors: string[], source: string, year: number, doi: string, summary: string, claim: string, evidence_level: string[], se_methods: string[], moderated: boolean, analysed: boolean): Promise<import("mongoose").Document<unknown, {}, Article> & Article & Required<{
         _id: string;
     }>>;
     getUser(doi: string): Promise<import("mongoose").Document<unknown, {}, Article> & Article & Required<{

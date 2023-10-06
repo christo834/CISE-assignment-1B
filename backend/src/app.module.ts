@@ -10,8 +10,8 @@ const OLD_PASSWORD = process.env.OLD_PASSWORD;
 
 @Module({
   imports: [
-    ArticleModule, MongooseModule.forRoot(`mongodb+srv://user1:wO7OY6V0vzwUNEAn@cluster0.yfilps9.mongodb.net/?retryWrites=true&w=majority`)
-
+    ArticleModule, 
+    MongooseModule.forRoot(`mongodb+srv://user1:wO7OY6V0vzwUNEAn@cluster0.yfilps9.mongodb.net/?retryWrites=true&w=majority`)
   ],
   controllers: [AppController],
   providers: [AppService], 
