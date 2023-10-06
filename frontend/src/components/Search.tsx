@@ -12,14 +12,15 @@ const ArticleDetails = () => {
 
   const fetchResults = async () => {
     setLoading(true);
-
     try {
       let response;
       if (searchType === "title") {
-        response = await fetch(`http://localhost:8000/article/title/${title}`);
+        response = await fetch(
+          `https://cise-backend-5103.vercel.app/article/title/${title}`
+        );
       } else {
         response = await fetch(
-          `http://localhost:8000/article/year/${startYear}/${endYear}`
+          `https://cise-backend-5103.vercel.app/article/year/${startYear}/${endYear}`
         );
       }
       if (response.ok) {

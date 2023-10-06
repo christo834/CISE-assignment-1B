@@ -5,7 +5,7 @@ interface SortableTableProps {
   data: any[];
 }
 
-const SortableTable: React.FC<SortableTableProps> = ({ headers, data }) => (
+const  SortableTable: React.FC<SortableTableProps> = ({ headers, data }) => (
   <table>
     <thead>
       <tr>
