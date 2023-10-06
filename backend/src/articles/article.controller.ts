@@ -83,5 +83,21 @@ export class ArticleController {
       };
     }
   }
+
+  @Get('/all')
+async getAllArticles() {
+  const articles = await this.articleService.findAll();
+  if (articles.length > 0) {
+    return {
+      msg: 'Articles found successfully',
+      articles: articles,
+    };
+  } else {
+    return {
+      msg: 'No articles found',
+    };
+  }
 }
+}
+
 

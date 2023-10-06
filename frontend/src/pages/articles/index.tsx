@@ -1,54 +1,43 @@
-import { GetStaticProps, NextPage } from "next";
-import SortableTable from "../../components/table/SortableTable";
-import data from "../../utils/dummydata.json";
-interface ArticlesInterface {
-  id: string;
-  title: string;
-  authors: string;
-  source: string;
-  pubyear: string;
-  doi: string;
-  claim: string;
-  evidence: string;
-}
-type ArticlesProps = {
-  articles: ArticlesInterface[];
-};
+import { useEffect, useState } from 'react';
+import "../../styles/table.css"
 
-const Articles: NextPage<ArticlesProps> = ({ articles }) => {
-  const headers: { key: keyof ArticlesInterface; label: string }[] = [
-    { key: "title", label: "Title" },
-    { key: "authors", label: "Authors" },
-    { key: "source", label: "Source" },
-    { key: "pubyear", label: "Publication Year" },
-    { key: "doi", label: "DOI" },
-    { key: "claim", label: "Claim" },
-    { key: "evidence", label: "Evidence" },
-  ];
+interface Article {
+  _id: string;
+  title: string;
+  authors: string[];
+  source: string;
+  year: number;
+  doi: string;
+  summary: string;
+}
+
+const Articles = () => {
+  const [articles, setArticles] = useState<Article[]>([]);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      const response = await fetch('http://localhost:8000/article/all');
+      const data = await response.json();
+      setArticles(data.articles);
+    };
+
+    fetchArticles();
+  }, []);
+
   return (
-    <div className="container">
-      <h1>Articles Index Page</h1>
-      <p>Page containing a table of articles:</p>
-      <SortableTable headers={headers} data={articles} />
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 border-white">
+      {articles.map((article) => (
+        <div className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap" key={article._id}>
+          <h3 className="font-bold text-xl mb-2">{article.title}</h3>
+          <p>{article.authors.join(', ')}</p>
+          <p>{article.source}</p>
+          <p>{article.year}</p>
+          <p>{article.doi}</p>
+          <p>{article.summary}</p>
+        </div>
+      ))}
     </div>
   );
 };
-export const getStaticProps: GetStaticProps<ArticlesProps> = async (_) => {
-  // Map the data to ensure all articles have consistent property names
-  const articles = data.map((article) => ({
-    id: article.id ?? article._id,
-    title: article.title,
-    authors: article.authors,
-    source: article.source,
-    pubyear: article.pubyear,
-    doi: article.doi,
-    claim: article.claim,
-    evidence: article.evidence,
-  }));
-  return {
-    props: {
-      articles,
-    },
-  };
-};
+
 export default Articles;
