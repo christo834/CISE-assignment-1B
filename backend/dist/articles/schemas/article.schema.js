@@ -33,11 +33,11 @@ exports.ArticleSchema = new mongoose.Schema({
         required: false
     },
     evidence_level: {
-        type: [String],
+        type: String,
         required: false
     },
     se_methods: {
-        type: [String],
+        type: String,
         required: false
     },
     moderated: {

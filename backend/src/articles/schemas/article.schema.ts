@@ -31,11 +31,11 @@ export const ArticleSchema = new mongoose.Schema({
       required: false
     },
     evidence_level: {
-      type: [String],
+      type: String,
       required: false
     },
     se_methods: {
-      type: [String],
+      type: String,
       required: false
     },
     moderated: {
@@ -60,8 +60,8 @@ export interface Article extends mongoose.Document {
     doi: string;
     summary: string;
     claim: string;
-    evidence_level: string[];
-    se_methods: string[];
+    evidence_level: string;
+    se_methods: string;
     moderated: boolean;
     analysed: boolean;
 }

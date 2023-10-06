@@ -17,8 +17,8 @@ export class ArticleService {
     doi: string,
     summary: string,
     claim: string,
-    evidence_level: string[],
-    se_methods: string[],
+    evidence_level: string,
+    se_methods: string,
     moderated: boolean,
     analysed: boolean)
   {

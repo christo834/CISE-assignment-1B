@@ -47,7 +47,7 @@ __decorate([
     __param(9, (0, common_1.Body)('moderated')),
     __param(10, (0, common_1.Body)('analysed')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Array, String, Number, String, String, String, Array, Array, Boolean, Boolean]),
+    __metadata("design:paramtypes", [String, Array, String, Number, String, String, String, String, String, Boolean, Boolean]),
     __metadata("design:returntype", Promise)
 ], ArticleController.prototype, "addArticle", null);
 __decorate([

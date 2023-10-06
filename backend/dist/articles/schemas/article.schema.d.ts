@@ -12,8 +12,8 @@ export declare const ArticleSchema: mongoose.Schema<any, mongoose.Model<any, any
     doi: string;
     summary: string;
     claim?: string;
-    evidence_level?: string[];
-    se_methods?: string[];
+    evidence_level?: string;
+    se_methods?: string;
     moderated?: boolean;
     analysed?: boolean;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
@@ -27,8 +27,8 @@ export declare const ArticleSchema: mongoose.Schema<any, mongoose.Model<any, any
     doi: string;
     summary: string;
     claim?: string;
-    evidence_level?: string[];
-    se_methods?: string[];
+    evidence_level?: string;
+    se_methods?: string;
     moderated?: boolean;
     analysed?: boolean;
 }>> & mongoose.FlatRecord<{
@@ -42,8 +42,8 @@ export declare const ArticleSchema: mongoose.Schema<any, mongoose.Model<any, any
     doi: string;
     summary: string;
     claim?: string;
-    evidence_level?: string[];
-    se_methods?: string[];
+    evidence_level?: string;
+    se_methods?: string;
     moderated?: boolean;
     analysed?: boolean;
 }> & {
@@ -58,8 +58,8 @@ export interface Article extends mongoose.Document {
     doi: string;
     summary: string;
     claim: string;
-    evidence_level: string[];
-    se_methods: string[];
+    evidence_level: string;
+    se_methods: string;
     moderated: boolean;
     analysed: boolean;
 }
