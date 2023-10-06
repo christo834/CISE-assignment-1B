@@ -19,8 +19,8 @@ let ArticleController = class ArticleController {
     constructor(articleService) {
         this.articleService = articleService;
     }
-    async addArticle(title, authors, source, year, doi, summary) {
-        const result = await this.articleService.insertArticle(title, authors, source, year, doi, summary);
+    async addArticle(title, authors, source, year, doi, summary, claim, evidence_level, se_methods, moderated, analysed) {
+        const result = await this.articleService.insertArticle(title, authors, source, year, doi, summary, claim, evidence_level, se_methods, moderated, analysed);
         return {
             msg: 'Article is submited successfully into database',
             articleId: result.id,
@@ -68,8 +68,13 @@ __decorate([
     __param(3, (0, common_1.Body)('year')),
     __param(4, (0, common_1.Body)('doi')),
     __param(5, (0, common_1.Body)('summary')),
+    __param(6, (0, common_1.Body)('claim')),
+    __param(7, (0, common_1.Body)('evidence_level')),
+    __param(8, (0, common_1.Body)('se_methods')),
+    __param(9, (0, common_1.Body)('moderated')),
+    __param(10, (0, common_1.Body)('analysed')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Array, String, Number, String, String]),
+    __metadata("design:paramtypes", [String, Array, String, Number, String, String, String, String, String, Boolean, Boolean]),
     __metadata("design:returntype", Promise)
 ], ArticleController.prototype, "addArticle", null);
 __decorate([

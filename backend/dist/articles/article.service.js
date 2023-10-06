@@ -20,7 +20,7 @@ let ArticleService = class ArticleService {
     constructor(articleModel) {
         this.articleModel = articleModel;
     }
-    async insertArticle(title, authors, source, year, doi, summary) {
+    async insertArticle(title, authors, source, year, doi, summary, claim, evidence_level, se_methods, moderated, analysed) {
         const newArticle = new this.articleModel({
             title,
             authors,
@@ -28,6 +28,13 @@ let ArticleService = class ArticleService {
             year,
             doi,
             summary,
+
+            claim,
+            evidence_level,
+            se_methods,
+            moderated,
+            analysed,
+
         });
         await newArticle.save();
         return newArticle;
