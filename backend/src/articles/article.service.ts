@@ -5,9 +5,9 @@ import { Article } from './schemas/article.schema';
 
 @Injectable()
 export class ArticleService {
-  constructor(
-    @InjectModel('article') private readonly articleModel: Model<Article>,
-  ) {}
+
+  constructor(@InjectModel('article') private readonly articleModel: Model<Article>) {}
+  
 
   //submit new article
   async insertArticle(
@@ -17,7 +17,14 @@ export class ArticleService {
     year: number,
     doi: string,
     summary: string,
-  ) {
+
+    claim: string,
+    evidence_level: string,
+    se_methods: string,
+    moderated: boolean,
+    analysed: boolean)
+  {
+
     const newArticle = new this.articleModel({
       title,
       authors,
@@ -25,6 +32,13 @@ export class ArticleService {
       year,
       doi,
       summary,
+
+      claim,
+      evidence_level,
+      se_methods,
+      moderated,
+      analysed,
+
     });
     await newArticle.save();
     return newArticle;

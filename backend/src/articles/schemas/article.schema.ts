@@ -9,7 +9,8 @@ export const ArticleSchema = new mongoose.Schema(
     },
     authors: {
       type: [String],
-      required: true,
+
+      required: true
     },
 
     source: {
@@ -26,19 +27,46 @@ export const ArticleSchema = new mongoose.Schema(
     },
     summary: {
       type: String,
-      required: true,
+
+      required: true
     },
-  },
-  { timestamps: true },
-);
+    claim: {
+      type: String,
+      required: false
+    },
+    evidence_level: {
+      type: String,
+      required: false
+    },
+    se_methods: {
+      type: String,
+      required: false
+    },
+    moderated: {
+      type: Boolean,
+      required: false
+    },
+    analysed: {
+      type: Boolean,
+      required: false
+    }
+
+
+}, { timestamps: true });
 
 // User interface
 export interface Article extends mongoose.Document {
-  _id: string;
-  title: string;
-  authors: string;
-  source: string;
-  year: number;
-  doi: string;
-  summary: string;
+    _id: string;
+    title: string;
+    authors: string[];
+    source: string;
+    year: number;
+    doi: string;
+    summary: string;
+    claim: string;
+    evidence_level: string;
+    se_methods: string;
+    moderated: boolean;
+    analysed: boolean;
 }
+

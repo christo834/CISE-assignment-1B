@@ -10,7 +10,6 @@ describe('ArticleController', () => {
       controllers: [ArticleController],
       providers: [ArticleService],
     }).compile();
-
     controller = module.get<ArticleController>(ArticleController);
   });
 
