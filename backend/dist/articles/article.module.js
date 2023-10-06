@@ -17,7 +17,9 @@ let ArticleModule = class ArticleModule {
 exports.ArticleModule = ArticleModule;
 exports.ArticleModule = ArticleModule = __decorate([
     (0, common_1.Module)({
-        imports: [mongoose_1.MongooseModule.forFeature([{ name: 'article', schema: article_schema_1.ArticleSchema }])],
+        imports: [
+            mongoose_1.MongooseModule.forFeature([{ name: 'article', schema: article_schema_1.ArticleSchema }]),
+        ],
         controllers: [article_controller_1.ArticleController],
         providers: [article_service_1.ArticleService],
     })

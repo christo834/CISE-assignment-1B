@@ -1,29 +1,33 @@
 import * as mongoose from 'mongoose';
 
-export const ArticleSchema = new mongoose.Schema({
+export const ArticleSchema = new mongoose.Schema(
+  {
     title: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     authors: {
       type: [String],
+
       required: true
     },
+
     source: {
       type: String,
-      required: true
+      required: true,
     },
     year: {
       type: Number,
-      required: true
+      required: true,
     },
     doi: {
       type: String,
-      required: true
+      required: true,
     },
     summary: {
       type: String,
+
       required: true
     },
     claim: {
@@ -65,3 +69,4 @@ export interface Article extends mongoose.Document {
     moderated: boolean;
     analysed: boolean;
 }
+

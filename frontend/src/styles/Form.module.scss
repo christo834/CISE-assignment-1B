@@ -1,19 +1,29 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: black;
+  flex-direction: column;
+  align-items: center;
+}
+
 .form {
   display: flex;
   flex-direction: column;
   max-width: 30em;
+  overflow: hidden;
+  justify-content: center;
 }
 
 .formItem {
-  padding: 1em;
+  padding: 0.5em;
   margin: 1em 0;
-
   flex-grow: 1;
 }
 
 .formTextArea {
   @extend .formItem;
-  min-height: 8em;
+  min-height: 4em;
 }
 
 .arrayItem {
@@ -25,7 +35,32 @@
 
 .buttonItem {
   width: 3rem;
-  height: 3rem;
+  height: 2rem;
   flex-grow: 0;
-  font-size: 1.5em;
+
+  font-size: 1em;
+  background-color: white;
 }
+
+.submitBtn {
+  background-color: #438aff;
+  padding: 10px;
+  border-radius: 100vmax;
+
+  cursor: pointer;
+  flex-grow: 1;
+}
+
+.labelTitle {
+  color: white;
+}
+
+.headerTitle {
+  color: white;
+}
+
+.articleFont {
+  font-size: 2rem;
+  margin-top: 10px;
+}
+

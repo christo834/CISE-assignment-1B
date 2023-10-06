@@ -6,26 +6,27 @@ exports.ArticleSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     authors: {
         type: [String],
-        required: true
+        required: true,
     },
     source: {
         type: String,
-        required: true
+        required: true,
     },
     year: {
         type: Number,
-        required: true
+        required: true,
     },
     doi: {
         type: String,
-        required: true
+        required: true,
     },
     summary: {
         type: String,
+
         required: true
     },
     claim: {
@@ -48,5 +49,6 @@ exports.ArticleSchema = new mongoose.Schema({
         type: Boolean,
         required: false
     }
+
 }, { timestamps: true });
 //# sourceMappingURL=article.schema.js.map

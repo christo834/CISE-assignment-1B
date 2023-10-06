@@ -28,11 +28,13 @@ let ArticleService = class ArticleService {
             year,
             doi,
             summary,
+
             claim,
             evidence_level,
             se_methods,
             moderated,
             analysed,
+
         });
         await newArticle.save();
         return newArticle;
@@ -43,6 +45,16 @@ let ArticleService = class ArticleService {
     }
     async findAll() {
         return this.articleModel.find().exec();
+    }
+    async getArticleByTitle(title) {
+        const article = await this.articleModel.findOne({ title });
+        return article;
+    }
+    async getArticlesByYearRange(startYear, endYear) {
+        const articles = await this.articleModel
+            .find({ year: { $gte: startYear, $lte: endYear } })
+            .exec();
+        return articles;
     }
 };
 exports.ArticleService = ArticleService;
