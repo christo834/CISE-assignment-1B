@@ -11,11 +11,11 @@ export declare const ArticleSchema: mongoose.Schema<any, mongoose.Model<any, any
     year: number;
     doi: string;
     summary: string;
-    claim: string;
-    evidence_level: string[];
-    se_methods: string[];
-    moderated: boolean;
-    analysed: boolean;
+    claim?: string;
+    evidence_level?: string[];
+    se_methods?: string[];
+    moderated?: boolean;
+    analysed?: boolean;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
@@ -26,11 +26,11 @@ export declare const ArticleSchema: mongoose.Schema<any, mongoose.Model<any, any
     year: number;
     doi: string;
     summary: string;
-    claim: string;
-    evidence_level: string[];
-    se_methods: string[];
-    moderated: boolean;
-    analysed: boolean;
+    claim?: string;
+    evidence_level?: string[];
+    se_methods?: string[];
+    moderated?: boolean;
+    analysed?: boolean;
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
@@ -41,11 +41,11 @@ export declare const ArticleSchema: mongoose.Schema<any, mongoose.Model<any, any
     year: number;
     doi: string;
     summary: string;
-    claim: string;
-    evidence_level: string[];
-    se_methods: string[];
-    moderated: boolean;
-    analysed: boolean;
+    claim?: string;
+    evidence_level?: string[];
+    se_methods?: string[];
+    moderated?: boolean;
+    analysed?: boolean;
 }> & {
     _id: mongoose.Types.ObjectId;
 }>;

@@ -23,7 +23,7 @@ export class ArticleController {
     @Body('doi') doi: string,
     @Body('summary') summary: string,
     @Body('claim') claim: string,
-    @Body('evidence_leve') evidence_level: string[],
+    @Body('evidence_level') evidence_level: string[],
     @Body('se_methods') se_methods: string[],
     @Body('moderated') moderated: boolean,
     @Body('analysed') analysed: boolean,
