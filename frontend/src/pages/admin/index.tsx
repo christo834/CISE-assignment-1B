@@ -35,16 +35,16 @@ const Admin: React.FC  = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 border-white">
+    <div className="my-5 grid grid-cols-1 md:grid-cols-4 gap-4 border-white">
       {articles.map((article) => (
-        <div className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap" key={article._id}>
+        <div className="rounded overflow-hidden mshadow-lg p-4 text-white border-white border-2 text-wrap" key={article._id}>
           <h3 className="font-bold text-xl mb-2">{article.title}</h3>
           <p>{article.authors.join(', ')}</p>
           <p>{article.source}</p>
           <p>{article.year}</p>
           <p>{article.doi}</p>
           <p>{article.summary}</p>
-          <button className="font-bold border-1 " onClick={openPopup}>Edit</button>
+          <button className="font-bold border-1 my-1 rounded-lg items-center justify-center w-10 bg-blue-500" onClick={openPopup}>Edit</button>
           <Popup isOpen={isPopupOpen} onClose = {closePopup} />
         </div>
       ))}
