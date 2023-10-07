@@ -12,7 +12,7 @@ const ArticleDetails = () => {
   const [searchPerformed, setSearchPerformed] = useState(false);
 
   // Default Value for drop-down options
-  const SE_METHODS = ["TDD", "SCRUM", "XP", "Waterfall"];
+  const SE_METHODS = ["TDD", "Scrum", "XP", "Waterfall"];
 
   const fetchResults = async () => {
     setLoading(true);
@@ -39,9 +39,15 @@ const ArticleDetails = () => {
         const articles = data.articles || [data.article];
         setResults(articles);
 
-        // If no results, display swal
+        // If no results, display swal, based on data message
         if (
           data.msg === "No article found with the provided title" ||
+          articles.length === 0 ||
+          articles[0] === null
+        ) {
+          swal("No results", "No results found for your search", "info");
+        } else if (
+          data.msg === "No articles found for the provided method" ||
           articles.length === 0 ||
           articles[0] === null
         ) {

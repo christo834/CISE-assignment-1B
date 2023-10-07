@@ -90,7 +90,7 @@ export class ArticleController {
       };
     } else {
       return {
-        msg: 'No articles found for the provided year range',
+        msg: 'No articles found for the provided method',
       };
     }
   }
