@@ -54,14 +54,14 @@ export class ArticleController {
     };
   }
 
-  //vist website /hello
+  //vist http://localhost:8000/article/hello
   @Get('/hello')
   getHello(@Request() req): string {
     return 'hello';
   }
 
 
-  //get one article, search via title
+  //visit http://localhost:8000/article/title/:title with input
   @Get('/title/:title')
   async getArticleByTitle(@Param('title') title: string) {
     const article = await this.articleService.getArticleByTitle(title);
@@ -77,7 +77,25 @@ export class ArticleController {
     }
   }
 
-  //get articles by year range
+  //visit http://localhost:8000/article/se_method/:method with input
+  @Get('/se_method/:method')
+  async getArticlesByMethod(
+    @Param('method') method: string,
+  ) {
+    const articles = await this.articleService.getArticlesByMethod(method);
+    if (articles.length > 0) {
+      return {
+        msg: 'Articles found successfully',
+        articles: articles,
+      };
+    } else {
+      return {
+        msg: 'No articles found for the provided method',
+      };
+    }
+  }
+
+  //visit http://localhost:8000/article/year/:startYear/:endYear with two inputs
   @Get('/year/:startYear/:endYear')
   async getArticlesByYearRange(
     @Param('startYear') startYear: number,

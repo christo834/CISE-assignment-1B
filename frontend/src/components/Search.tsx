@@ -1,20 +1,31 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import swal from "sweetalert";
 
 const ArticleDetails = () => {
-  const [searchType, setSearchType] = useState("title");
+  const [searchType, setSearchType] = useState("method");
+  const [method, setMethod] = useState("");
   const [title, setTitle] = useState("");
   const [startYear, setStartYear] = useState("");
   const [endYear, setEndYear] = useState("");
   const [results, setResults] = useState<any>([]);
   const [loading, setLoading] = useState(false);
-  const [searchPerformed, setSearchPerformed] = useState(false); // New state variable
+  const [searchPerformed, setSearchPerformed] = useState(false);
+
+  // Default Value for drop-down options
+  const SE_METHODS = ["TDD", "Scrum", "XP", "Waterfall"];
 
   const fetchResults = async () => {
     setLoading(true);
     try {
       let response;
-      if (searchType === "title") {
+      if (searchType === "method") {
+        response = await fetch(
+          
+          //NEED TO MODIFY THE CONTROLLER ON MAIN BRANCH BASED ON FEAT BRANCH, it is working now at feat/search-article-by-method
+          //`https://cise-backend-5103.vercel.app/article/se_method/${method}`
+          `http://localhost:8000/article/se_method/${method}` //temporary local fix, for testing purposes
+        );
+      } else if (searchType === "title") {
         response = await fetch(
           `https://cise-backend-5103.vercel.app/article/title/${title}`
         );
@@ -28,9 +39,15 @@ const ArticleDetails = () => {
         const articles = data.articles || [data.article];
         setResults(articles);
 
-        // If no results, display swal
+        // If no results, display swal, based on data message
         if (
           data.msg === "No article found with the provided title" ||
+          articles.length === 0 ||
+          articles[0] === null
+        ) {
+          swal("No results", "No results found for your search", "info");
+        } else if (
+          data.msg === "No articles found for the provided method" ||
           articles.length === 0 ||
           articles[0] === null
         ) {
@@ -49,7 +66,6 @@ const ArticleDetails = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // If searchType is 'year' and startYear is greater than endYear, display an error and return
     if (searchType === "year" && parseInt(startYear) > parseInt(endYear)) {
       swal(
         "Invalid year range",
@@ -60,6 +76,7 @@ const ArticleDetails = () => {
     }
 
     fetchResults();
+    setSearchPerformed(true); // Set searchPerformed to true after performing a search
   };
 
   return (
@@ -71,10 +88,10 @@ const ArticleDetails = () => {
         <div className="mx-auto text-black">
           <select
             className="my-4"
-            placeholder="Select type of search"
             value={searchType}
             onChange={(e) => setSearchType(e.target.value)}
           >
+            <option value="method">Search by Method</option>
             <option value="title">Search by Title</option>
             <option value="year">Search by Year Range</option>
           </select>
@@ -86,6 +103,19 @@ const ArticleDetails = () => {
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter article title"
             />
+          ) : searchType === "method" ? (
+            <select
+              className="my-4"
+              value={method}
+              onChange={(e) => setMethod(e.target.value)}
+            >
+              <option value="">Select a Method</option>
+              {SE_METHODS.map((method) => (
+                <option key={method} value={method}>
+                  {method}
+                </option>
+              ))}
+            </select>
           ) : (
             <>
               <input
@@ -115,7 +145,7 @@ const ArticleDetails = () => {
 
       {loading ? (
         <div>Loading...</div>
-      ) : searchPerformed && results.length === 0 ? ( // Check if a search has been performed before displaying "No results found"
+      ) : searchPerformed && results.length === 0 ? (
         <div className="text-center text-red-500">No results found</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
