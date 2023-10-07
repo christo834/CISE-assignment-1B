@@ -9,8 +9,9 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+/frontend/.next/
+/frontend/out/
+/frontend/node_modules
 
 # nest.js
 /backend/dist
@@ -37,3 +38,49 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ::::::::::::::ignoring all these in frontend:::::::::::::::::::::::::::::::::::
+# Dependencies
+/frontend/node_modules
+
+# Build directories
+/frontend/.next
+/frontend/out
+
+# Environment variables
+/frontend/.env.local
+/frontend/.env.development
+/frontend/.env.production
+
+# IDE/Editor specific files (Optional, based on your preference)
+/frontend/.vscode
+/frontend/.idea
+/frontend/*.suo
+/frontend/*.ntvs*
+/frontend/*.njsproj
+/frontend/*.sln
+/frontend/*.swp
+
+# Logs and debugging
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+
+# macOS specific
+/frontend/.DS_Store
+
+# Windows specific
+/frontend/Thumbs.db
+
+# Testing and coverage reports
+/frontend/coverage
+
+# Compiled JavaScript or TypeScript files
+/frontend/*.js
+/frontend/*.ts
+/frontend/*.d.ts
+
+# Dependency lock files (Optional, based on your package manager)
+/frontend/yarn.lock
+/frontend/package-lock.json
+/frontend/.pnp.js
