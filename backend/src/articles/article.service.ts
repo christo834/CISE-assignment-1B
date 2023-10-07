@@ -61,6 +61,17 @@ export class ArticleService {
     return article;
   }
 
+
+  //get articles by method type
+  async getArticlesByMethod(
+    method: string,
+  ): Promise<Article[]> {
+    const articles = await this.articleModel
+      .find({ se_methods: method })
+      .exec();
+    return articles;
+  }
+
   //get articles by year range
   async getArticlesByYearRange(
     startYear: number,
