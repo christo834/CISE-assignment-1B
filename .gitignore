@@ -84,3 +84,47 @@ next-env.d.ts
 /frontend/yarn.lock
 /frontend/package-lock.json
 /frontend/.pnp.js
+
+# ::::::::::::::ignoring all these in backend:::::::::::::::::::::::::::::::::::
+# Dependencies
+/backend/node_modules
+
+# Build directories
+/backend/dist
+
+# Environment variables (if applicable)
+/backend/.env
+
+# IDE/Editor specific files (Optional, based on your preference)
+/backend/.vscode
+/backend/.idea
+/backend/*.suo
+/backend/*.ntvs*
+/backend/*.njsproj
+/backend/*.sln
+/backend/*.swp
+
+# Logs and debugging
+/backend/npm-debug.log*
+/backend/yarn-debug.log*
+/backend/yarn-error.log*
+
+# macOS specific
+/backend/.DS_Store
+
+# Windows specific
+/backend/Thumbs.db
+
+# Testing and coverage reports (if applicable)
+/backend//coverage
+
+# Compiled JavaScript or TypeScript files (if applicable)
+/backend/*.js
+/backend/*.ts
+/backend/*.d.ts
+
+# Dependency lock files (Optional, based on your package manager)
+/backend/yarn.lock
+/backend/package-lock.json
+/backend/.pnp.js
+
