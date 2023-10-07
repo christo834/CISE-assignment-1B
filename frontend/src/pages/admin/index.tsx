@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import "../../styles/table.css"
+import Popup from '../../components/pop-up/Popup';
 
-interface Article {
+interface Edit_Article {
   _id: string;
   title: string;
   authors: string[];
@@ -11,8 +12,17 @@ interface Article {
   summary: string;
 }
 
-const Articles = () => {
-  const [articles, setArticles] = useState<Article[]>([]);
+const Admin: React.FC  = () => {
+  const [articles, setArticles] = useState<Edit_Article[]>([]);
+  const [isPopupOpen, setPopUpOpen] = useState(false);
+
+  const openPopup = ()=>{
+    setPopUpOpen(true);
+  };
+
+  const closePopup = () =>{
+    setPopUpOpen(false);
+  };
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -34,10 +44,12 @@ const Articles = () => {
           <p>{article.year}</p>
           <p>{article.doi}</p>
           <p>{article.summary}</p>
+          <button className="font-bold border-1 " onClick={openPopup}>Edit</button>
+          <Popup isOpen={isPopupOpen} onClose = {closePopup} />
         </div>
       ))}
     </div>
   );
 };
 
-export default Articles;
+export default Admin;
