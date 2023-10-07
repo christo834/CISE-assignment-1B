@@ -13,32 +13,35 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className={`bg-white rounded-3xl  h-64 w-1/4 absolute mx-auto my-auto inset-0 flex flex-col items-center justify-center z-50 text-black ${
+      className={`bg-white rounded-3xl border-4 border-blue-500 h-fit w-1/4 absolute mx-auto my-auto inset-0 flex flex-col items-center justify-center z-50 text-black ${
         isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
       } transition-opacity duration-300 ease-in-out`}
     >
+        <h1 className="text-xl my-1">Edit Submission</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input className='border'{...register("title")} placeholder="Title" />
+            <input className='border border-black mt-2'{...register("title")} placeholder="Title" />
             <p>
-                <input className='border' {...register("authors")} placeholder="Authors" />
+                <input className='border border-black mt-2' {...register("authors")} placeholder="Authors" />
             </p>
             <p>
-                <input className='border' {...register("source")} placeholder="Source" />
+                <input className='border border-black mt-2' {...register("source")} placeholder="Source" />
             </p>
             <p>
-                <input className='border' {...register("pubyear")} placeholder="Publication Year" />
+                <input className='border border-black mt-2' {...register("pubyear")} placeholder="Publication Year" />
             </p>
             <p>
-                <input className='border' {...register("doi")} placeholder="DOI" />
+                <input className='border border-black mt-2' {...register("doi")} placeholder="DOI" />
             </p>
-            <select {...register("linked_discussion")}>
+            <select className='border border-black mt-2' {...register("linked_discussion")}>
                 <option value="">Select SE practice...</option>
                 <option value="TDD">TDD</option>
                 <option value="Mob Programming">Mob Programmin</option>
             </select>
-            <input type="submit" />
+            <button className="bg-blue" type="submit">
+              Submit
+            </button>
         </form>
-    <button onClick={onClose} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"> Close </button>
+    <button onClick={onClose} className="my-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"> Close </button>
     </div>
   );
 };
