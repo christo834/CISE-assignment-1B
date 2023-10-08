@@ -6,6 +6,7 @@ import {
   UseGuards,
   Request,
   Param,
+  Put,
 } from '@nestjs/common';
 
 import { ArticleService } from './article.service';
@@ -27,8 +28,8 @@ export class ArticleController {
     @Body('claim') claim: string,
     @Body('evidence_level') evidence_level: string,
     @Body('se_methods') se_methods: string,
-    @Body('moderated') moderated: boolean,
-    @Body('analysed') analysed: boolean,
+    @Body('moderated') moderated: number,
+    @Body('analysed') analysed: number,
   ) 
   {
 
@@ -43,8 +44,9 @@ export class ArticleController {
       claim,
       evidence_level,
       se_methods,
+      analysed,
       moderated,
-      analysed
+
 
     );
     return {
@@ -117,6 +119,7 @@ export class ArticleController {
     }
   }
 
+  //visit http://localhost:8000/article/all
   @Get('/all')
 async getAllArticles() {
   const articles = await this.articleService.findAll();
@@ -131,6 +134,73 @@ async getAllArticles() {
     };
   }
 }
+
+// Add this new endpoint to your ArticleController
+//visit http://localhost:8000/article/:id/:moderated 
+@Post('/:id/:moderated')
+async updateModeratorStatus(
+  @Param('id') _id: string,
+  @Param('moderated') moderated: string,
+) {
+  const result = await this.articleService.updateModeratorStatus(_id, moderated);
+  return {
+    msg: 'Moderated status updated successfully',
+    articleTitle: result.id,
+    moderatorStatus: result.moderated,
+  };
 }
+
+//For getting all unmoderated articles
+//visit http://localhost:8000/article/unmoderated
+@Get('/unmoderated')
+  async GetUnmoderatedArticles() {
+    const articles = await this.articleService.getUnmoderatedArticles();
+    if (articles.length > 0) {
+      return {
+        msg: 'Unmoderated articles found successfully',
+        articles: articles,
+      };
+    } else {
+      return {
+        msg: 'No unmoderated articles found',
+      };
+    }
+  }
+
+  //For getting moderated articles
+  //visit http://localhost:8000/article/moderated
+  @Get('/moderated')
+  async GetModeratedartices() {
+    const articles = await this.articleService.getModeratedArticles();
+    if (articles.length > 0) {
+      return {
+        msg: 'Moderated articles found successfully',
+        articles: articles,
+      };
+    } else {
+      return {
+        msg: 'No moderated articles found',
+      };
+    }
+  }
+
+  //Getting article by inputting the ID
+  //visit //http://localhost:8000/article/:_id
+  @Get('/:_id')
+  async getByID( @Param('_id') _id: string) {
+    const article = await this.articleService.getByID(_id);
+    if (article) {
+      return {
+        msg: 'Article found successfully',
+        article: article,
+      };
+    } else {
+      return {
+        msg: 'No article found with the provided title',
+      };
+    }
+  }
+}
+
 
 

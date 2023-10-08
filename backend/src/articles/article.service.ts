@@ -2,10 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Article } from './schemas/article.schema';
+import { NotFoundException } from '@nestjs/common';
+
 
 @Injectable()
 export class ArticleService {
-
   constructor(@InjectModel('article') private readonly articleModel: Model<Article>) {}
   
 
@@ -17,14 +18,13 @@ export class ArticleService {
     year: number,
     doi: string,
     summary: string,
-
     claim: string,
     evidence_level: string,
     se_methods: string,
-    moderated: boolean,
-    analysed: boolean)
+    moderated: number,
+    analysed: number
+    )
   {
-
     const newArticle = new this.articleModel({
       title,
       authors,
@@ -32,7 +32,6 @@ export class ArticleService {
       year,
       doi,
       summary,
-
       claim,
       evidence_level,
       se_methods,
@@ -44,12 +43,30 @@ export class ArticleService {
     return newArticle;
   }
 
+  async updateModeratorStatus(_id: string, inputModerated: string) {
+    const article = await this.articleModel.findById(_id);
+    if (!article) {
+      throw new NotFoundException('Article not found');
+    }
+
+    console.log('Before:', article);
+    article.moderated = inputModerated; // Update the 'moderated' field
+    article.markModified('moderated');
+    console.log('After:', article);
+    await article.save();
+    return article;
+  }
+
   //get one article, search via doi
   async getUser(doi: string) {
     const article = await this.articleModel.findOne({ doi });
     return article;
   }
 
+  async getByID(_id: string) {
+    const article = await this.articleModel.findById(_id);
+    return article;
+  }
   //show all articles in database
   async findAll(): Promise<Article[]> {
     return this.articleModel.find().exec();
@@ -60,8 +77,7 @@ export class ArticleService {
     const article = await this.articleModel.findOne({ title });
     return article;
   }
-
-
+  
   //get articles by method type
   async getArticlesByMethod(
     method: string,
@@ -80,6 +96,16 @@ export class ArticleService {
     const articles = await this.articleModel
       .find({ year: { $gte: startYear, $lte: endYear } })
       .exec();
+    return articles;
+  }
+
+  async getUnmoderatedArticles(): Promise<Article[]> {
+    const articles = await this.articleModel.find({ moderated: 'true' }).exec();
+    return articles;
+  }
+
+  async getModeratedArticles(): Promise<Article[]> {
+    const articles = await this.articleModel.find({ moderated: 'true' }).exec();
     return articles;
   }
 }
