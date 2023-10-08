@@ -18,7 +18,7 @@ describe('AppController', () => {
   describe('AppController', () => {
     it("Goal: see if root return a result", () => {
       expect(appController.getHello()).toBe(
-        "NestJS Backend is Running Successfully...",
+        "NestJs Backend is Running Successfully...",
       );
     });
   });
