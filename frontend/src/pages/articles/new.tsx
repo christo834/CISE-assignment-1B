@@ -11,14 +11,20 @@ const NewDiscussion = () => {
   const [summary, setSummary] = useState("");
   const [linkedDiscussion, setLinkedDiscussion] = useState("");
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
+  const [claim, setClaim] = useState("");
+  const [evidence_level, setEvidence_Level] = useState("");
+  const [se_methods, setSE_Method] = useState("");
+  const [moderated, setModerated] = useState<number>(0);
+  const [analysed, setAnalysed] = useState<number>(0);
 
   const submitNewArticle = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     event.preventDefault();
     // Your fetch logic here
+    //https://cise-backend-5103.vercel.app/article/submit remember to put below before comit
     try {
-      const response = await fetch("https://cise-backend-5103.vercel.app/article/submit", {
+      const response = await fetch("http://localhost:8000/article/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -30,6 +36,11 @@ const NewDiscussion = () => {
           year: pubYear,
           doi,
           summary,
+          analysed,
+          moderated,
+          claim,
+          evidence_level,
+          se_methods,
           //linked_discussion: linkedDiscussion,
         }),
       });

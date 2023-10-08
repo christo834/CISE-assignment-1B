@@ -9,7 +9,6 @@ export const ArticleSchema = new mongoose.Schema(
     },
     authors: {
       type: [String],
-
       required: true
     },
 
@@ -43,12 +42,14 @@ export const ArticleSchema = new mongoose.Schema(
       required: false
     },
     moderated: {
-      type: Boolean,
-      required: false
+      type: String,
+      default: false,
+      required: false,
     },
     analysed: {
-      type: Boolean,
-      required: false
+      type: String,
+      default: false,
+      require: false,
     }
 
 
@@ -66,7 +67,7 @@ export interface Article extends mongoose.Document {
     claim: string;
     evidence_level: string;
     se_methods: string;
-    moderated: boolean;
-    analysed: boolean;
+    moderated: string;
+    analysed: string;
 }
 
