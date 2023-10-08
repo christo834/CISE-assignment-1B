@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import "../../styles/table.css"
+import swal from 'sweetalert';
 
 interface Moderator {
   _id: string;
@@ -9,6 +10,7 @@ interface Moderator {
   year: number;
   doi: string;
   summary: string;
+  moderated: string; // Add this line
 }
 
 const Moderator = () => {
@@ -25,36 +27,52 @@ const Moderator = () => {
   }, []);
 
   const handleSetModeratorTrue = async (id: string) => {
-    const response = await fetch(`https://cise-backend-5103.vercel.app/article/${id}/moderator`, {
-      method: 'PUT',
+    const article = articles.find(article => article._id === id);
+    if (article && article.moderated === 'true') {
+      swal("Info", "This article has already been approved", "info");
+      return;
+    }
+
+    const response = await fetch(`https://cise-backend-5103.vercel.app/article/${id}/true`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ moderator: true }),
     });
 
     if (response.ok) {
       const updatedArticles = articles.map(article =>
-        article._id === id ? { ...article, moderator: true } : article
+        article._id === id ? { ...article, moderated: 'true' } : article
       );
       setArticles(updatedArticles);
+      swal("Success", "Article approved successfully", "success");
+    } else {
+      swal("Error", "Failed to approve the article", "error");
     }
   };
 
   const handleSetModeratorFalse = async (id: string) => {
-    const response = await fetch(`https://cise-backend-5103.vercel.app/article/${id}/moderator`, {
-      method: 'PUT',
+    const article = articles.find(article => article._id === id);
+    if (article && article.moderated === 'false') {
+      swal("Info", "This article has already been disapproved", "info");
+      return;
+    }
+
+    const response = await fetch(`https://cise-backend-5103.vercel.app/article/${id}/false`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ moderator: false }),
     });
 
     if (response.ok) {
       const updatedArticles = articles.map(article =>
-        article._id === id ? { ...article, moderator: false } : article
+        article._id === id ? { ...article, moderated: 'false' } : article
       );
       setArticles(updatedArticles);
+      swal("Success", "Article disapproved successfully", "success");
+    } else {
+      swal("Error", "Failed to disapprove the article", "error");
     }
   };
 

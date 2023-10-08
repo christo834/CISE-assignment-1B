@@ -4,11 +4,11 @@ import { Model } from 'mongoose';
 import { Article } from './schemas/article.schema';
 import { NotFoundException } from '@nestjs/common';
 
-
 @Injectable()
 export class ArticleService {
-  constructor(@InjectModel('article') private readonly articleModel: Model<Article>) {}
-  
+  constructor(
+    @InjectModel('article') private readonly articleModel: Model<Article>,
+  ) {}
 
   //submit new article
   async insertArticle(
@@ -21,10 +21,9 @@ export class ArticleService {
     claim: string,
     evidence_level: string,
     se_methods: string,
-    moderated: number,
-    analysed: number
-    )
-  {
+    moderated: string,
+    analysed: string,
+  ) {
     const newArticle = new this.articleModel({
       title,
       authors,
@@ -37,7 +36,6 @@ export class ArticleService {
       se_methods,
       moderated,
       analysed,
-
     });
     await newArticle.save();
     return newArticle;
@@ -77,11 +75,9 @@ export class ArticleService {
     const article = await this.articleModel.findOne({ title });
     return article;
   }
-  
+
   //get articles by method type
-  async getArticlesByMethod(
-    method: string,
-  ): Promise<Article[]> {
+  async getArticlesByMethod(method: string): Promise<Article[]> {
     const articles = await this.articleModel
       .find({ se_methods: method })
       .exec();
@@ -100,7 +96,9 @@ export class ArticleService {
   }
 
   async getUnmoderatedArticles(): Promise<Article[]> {
-    const articles = await this.articleModel.find({ moderated: 'true' }).exec();
+    const articles = await this.articleModel
+      .find({ moderated: 'false' })
+      .exec();
     return articles;
   }
 
@@ -109,4 +107,3 @@ export class ArticleService {
     return articles;
   }
 }
-
