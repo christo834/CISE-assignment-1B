@@ -15,10 +15,10 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!, Hello CISE Team!, Let\'s build SPEED App! "', () => {
+  describe('AppController', () => {
+    it("Goal: see if root return a result", () => {
       expect(appController.getHello()).toBe(
-        "Hello World!, Hello CISE Team!, Let's build SPEED App! ",
+        "NestJs Backend is Running Successfully...",
       );
     });
   });
