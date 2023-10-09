@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 
 import { ArticleService } from './article.service';
+import { Article } from './schemas/article.schema';
 
 @Controller('article')
 export class ArticleController {
@@ -196,4 +197,19 @@ export class ArticleController {
       };
     }
   }
+
+  @Put('/:id')
+  async updateArticle(
+    @Param('id') id: string,
+    @Body() articleData: Partial<Article>,
+  ) {
+    const updatedArticle = await this.articleService.updateArticle(
+      id,
+      articleData,
+    );
+    return {
+      msg: 'Article updated successfully',
+      article: updatedArticle,
+    };
+  } 
 }

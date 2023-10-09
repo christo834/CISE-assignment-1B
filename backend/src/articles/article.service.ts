@@ -106,4 +106,15 @@ export class ArticleService {
     const articles = await this.articleModel.find({ moderated: 'true' }).exec();
     return articles;
   }
+
+  async updateArticle(id: string, articleData: Partial<Article>) {
+    const article = await this.articleModel.findById(id);
+    if (!article) {
+      throw new NotFoundException('Article not found');
+    }
+
+    Object.assign(article, articleData, { lastEdited: new Date() });
+    await article.save();
+    return article;
+  }
 }
