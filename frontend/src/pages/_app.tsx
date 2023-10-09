@@ -6,6 +6,7 @@ import PopulatedNavBar from "../components/PopulatedNavbar";
 import Footer from "@/components/nav/Footer";
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
+
     <SessionProvider session={session}>
       <div className="flex flex-col min-h-screen">
         <PopulatedNavBar />
