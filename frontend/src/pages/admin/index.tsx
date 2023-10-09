@@ -92,7 +92,7 @@ const Admin = () => {
         </div>  
       ) : (
         articles.map((article) => (
-          <div className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap my-4 " key={article._id}>
+          <div className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap my-4 min-w-min" key={article._id}>
             <h3 className="font-bold text-xl text-wrap mb-2">{article.title}</h3>
             <p>{article.authors.join(', ')}</p>
             <p>{article.source}</p>
