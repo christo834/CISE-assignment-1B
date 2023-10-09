@@ -15,40 +15,39 @@ interface Article {
   moderated: string;
 }
 
-
-
 const Admin = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [editingArticle, setEditingArticle] = useState<Partial<Article>>({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const fetchArticles = async () => {
+    try {
+      setLoading(true);
+
+      const response = await fetch('https://cise-backend-5103.vercel.app/article/all');
+      if (!response.ok) {
+        throw new Error('Failed to fetch');
+      }
+
+      const data = await response.json();
+      setArticles(data.articles);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
-    Modal.setAppElement('#root');
+    if (typeof window !== 'undefined') {
+      Modal.setAppElement('#root');
+    }
   }, []);
 
   useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        setLoading(true);
-
-        const response = await fetch('https://cise-backend-5103.vercel.app/article/all');
-        if (!response.ok) {
-          throw new Error('Failed to fetch');
-        }
-
-        const data = await response.json();
-        setArticles(data.articles);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
     fetchArticles();
   }, []);
-
   const handleEdit = (article: Article) => {
     setEditingArticle(article);
     setIsModalOpen(true);
@@ -56,7 +55,7 @@ const Admin = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+  
     try {
       const response = await fetch(`http://localhost:8000/article/${editingArticle._id}`, {
         method: 'PUT',
@@ -65,26 +64,25 @@ const Admin = () => {
         },
         body: JSON.stringify(editingArticle),
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to update article');
       }
-
+  
       const updatedArticle = await response.json();
       console.log(updatedArticle);
-
-      
-      setArticles(prevArticles => prevArticles.map(article => article._id === updatedArticle._id ? updatedArticle : article));
-
-
-
-
+  
       swal("Success", "Article updated successfully", "success");
       setIsModalOpen(false);
+  
+      // Refetch the articles
+      fetchArticles();
+      setLoading(false); 
     } catch (error) {
       swal("Error", (error as Error).message, "error");
     }
   };
+  
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 border-white m-6">
