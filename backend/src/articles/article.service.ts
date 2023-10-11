@@ -70,6 +70,11 @@ export class ArticleService {
     return this.articleModel.find().exec();
   }
 
+  //show all articles in database
+  async findAnalysedArticles(): Promise<Article[]> {
+    return this.articleModel.find({ analysed: true }).exec();
+  }
+
   //get one article, search via title
   async getArticleByTitle(title: string) {
     const article = await this.articleModel.findOne({ title });
