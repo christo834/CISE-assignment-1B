@@ -69,8 +69,8 @@ export class ArticleService {
   async findAll(): Promise<Article[]> {
     return this.articleModel.find().exec();
   }
-
-  //show all articles in database
+  ß;
+  //show all articles that have been analysed to true
   async findAnalysedArticles(): Promise<Article[]> {
     return this.articleModel.find({ analysed: true }).exec();
   }

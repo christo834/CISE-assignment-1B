@@ -128,6 +128,7 @@ export class ArticleController {
       };
     }
   }
+  ß;
 
   //visit http://localhost:8000/article/analysed
   @Get('/analysed')
