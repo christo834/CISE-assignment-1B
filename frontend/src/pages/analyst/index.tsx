@@ -14,6 +14,7 @@ interface Article {
   summary: string;
   moderated: string;
   claim: string;
+  analysed: string;
   evidence_level: string;
 }
 
@@ -55,11 +56,38 @@ const Analyst = () => {
     setIsModalOpen(true);
   };
 
+  const handleSetAnalysedTrue = async (id: string) => {
+    const article = articles.find(article => article._id === id);
+    if (article && article.analysed === 'true') {
+      swal("Info", "This article has already been approved", "info");
+      return;
+    }
+
+    //CHANGE TO VERCEL LINK
+    //https://cise-backend-5103.vercel.app/article/analysed/${editingArticle._id}/true
+    const response = await fetch(`http://localhost:8000/article/analysed/${id}/true`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      const updatedArticles = articles.map(article =>
+        article._id === id ? { ...article, analysed: 'true' } : article
+      );
+      setArticles(updatedArticles);
+      swal("Success", "Article analysed successfully", "success");
+    } else {
+      swal("Error", "Failed to analyse the article", "error");
+    }
+  };
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
     try {
-      const response = await fetch(`https://cise-backend-5103.vercel.app/article/${editingArticle._id}`, {
+      //CHANGE TO VERCEL LINK ABOVE
+      //https://cise-backend-5103.vercel.app/article/${editingArticle._id}
+      const response = await fetch(`http://localhost:8000/article/${editingArticle._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +101,6 @@ const Analyst = () => {
   
       const updatedArticle = await response.json();
       console.log(updatedArticle);
-  
       swal("Success", "Article updated successfully", "success");
       setIsModalOpen(false);
   
@@ -83,6 +110,7 @@ const Analyst = () => {
     } catch (error) {
       swal("Error", (error as Error).message, "error");
     }
+    handleSetAnalysedTrue(editingArticle._id as string);
   };
 
   return (

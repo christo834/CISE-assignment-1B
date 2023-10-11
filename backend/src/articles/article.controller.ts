@@ -147,6 +147,24 @@ export class ArticleController {
     };
   }
 
+    // Add this new endpoint to your ArticleController
+  //visit http://localhost:8000/article/analysed/:id/:analysed
+  @Post('/analysed/:id/:analysed')
+  async updateAnalysedStatus(
+    @Param('id') _id: string,
+    @Param('analysed') analysed: string,
+  ) {
+    const result = await this.articleService.updateAnalysedStatus(
+      _id,
+      analysed,
+    );
+    return {
+      msg: 'Moderated status updated successfully',
+      articleTitle: result.id,
+      analysedStatus: result.analysed,
+    };
+  }
+
   //For getting all unmoderated articles
   //visit http://localhost:8000/article/unmoderated
   @Get('/unmoderated')
