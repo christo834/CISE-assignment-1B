@@ -19,8 +19,6 @@ const Articles = () => {
       const response = await fetch('http://localhost:8000/article/analysed');
       const data = await response.json();
 
-      //  const publishedArticles = data.articles.filter((article: Article) => article. === true);
-
       setArticles(data.articles);
     };
 
