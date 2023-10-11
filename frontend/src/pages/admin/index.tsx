@@ -57,7 +57,7 @@ const Admin = () => {
     event.preventDefault();
   
     try {
-      const response = await fetch(`http://localhost:8000/article/${editingArticle._id}`, {
+      const response = await fetch(`https://cise-backend-5103.vercel.app/article/${editingArticle._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
