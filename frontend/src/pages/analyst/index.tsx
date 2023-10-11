@@ -6,6 +6,13 @@ import Modal from 'react-modal';
 
 interface Article {
   _id: string;
+  title: string;
+  authors: string[];
+  source: string;
+  year: number;
+  doi: string;
+  summary: string;
+  moderated: string;
   claim: string;
   evidence_level: string;
 }
