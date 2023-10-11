@@ -1,7 +1,7 @@
 import React from "react";
-import ArticleDetails from "@/components/Search";
+import ArticleDetails from "../components/Search";
 import "../styles/index.scss";
-import Footer from "@/components/nav/Footer";
+import Footer from "../components/nav/Footer";
 
 export default function Home() {
   return (
