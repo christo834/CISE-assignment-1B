@@ -36,12 +36,7 @@ const Admin: React.FC<AdminProps> = ({ articles: initialArticles }) => {
   const [articles, setArticles] = useState<Article[]>(initialArticles);
   const [editingArticle, setEditingArticle] = useState<Partial<Article>>({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Call fetchArticles on initial render and whenever articles change
-    fetchArticles();
-  }, []);
+  const [loading, setLoading] = useState(false);
 
   const fetchArticles = async () => {
     try {
@@ -128,7 +123,6 @@ const Admin: React.FC<AdminProps> = ({ articles: initialArticles }) => {
           </div>
         ))
       )}
-
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
