@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import "../../styles/table.css"
 import swal from 'sweetalert';
+import { SpinnerInfinity } from 'spinners-react';
 
 interface Moderator {
   _id: string;
@@ -10,22 +11,35 @@ interface Moderator {
   year: number;
   doi: string;
   summary: string;
-  moderated: string; // Add this line
+  moderated: string;
 }
 
 const Moderator = () => {
   const [articles, setArticles] = useState<Moderator[]>([]);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const response = await fetch('https://cise-backend-5103.vercel.app/article/all');
-      const data = await response.json();
-      setArticles(data.articles);
-    };
+      try {
+        setLoading(true);
+
+        const response = await fetch('https://cise-backend-5103.vercel.app/article/all');
+        if (!response.ok) {
+          throw new Error('Failed to fetch');
+        }
+
+        const data = await response.json();
+        setArticles(data.articles);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
 
     fetchArticles();
   }, []);
-
   const handleSetModeratorTrue = async (id: string) => {
     const article = articles.find(article => article._id === id);
     if (article && article.moderated === 'true') {
@@ -78,26 +92,31 @@ const Moderator = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 border-white">
-      {articles.map((article) => (
-        <div className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap" key={article._id}>
-          <h3 className="font-bold text-xl mb-2">{article.title}</h3>
-          <p>{article.authors.join(', ')}</p>
-          <p>{article.source}</p>
-          <p>{article.year}</p>
-          <p>{article.doi}</p>
-          <p>{article.summary}</p>
+      {loading ? (
+          <div className="fixed inset-0 flex items-center justify-center">
+          <SpinnerInfinity size={200} thickness={180} speed={180} color="rgba(71, 172, 57, 1)" secondaryColor="rgba(57, 172, 151, 0.44)" />
+        </div>  
+      ) : (
+        articles.map((article) => (
+          <div className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap my-4 " key={article._id}>
+            <h3 className="font-bold text-xl mb-2 text-wrap mb-6">{article.title}</h3>
+            <p>{article.authors.join(', ')}</p>
+            <p>{article.source}</p>
+            <p>{article.year}</p>
+            <p className='italic'>{article.doi}</p>
+            <p>{article.summary}</p>
 
-          <div className="flex justify-between">
-            <button className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded" onClick={() => handleSetModeratorTrue(article._id)}>
-              Approve
-            </button>
-            <button className="bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded"  onClick={() => handleSetModeratorFalse(article._id)}>
-              Disapprove 
-            </button>
+            <div className="flex justify-between mt-4">
+              <button className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded" onClick={() => handleSetModeratorTrue(article._id)}>
+                Approve
+              </button>
+              <button className="bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded"  onClick={() => handleSetModeratorFalse(article._id)}>
+                Disapprove 
+              </button>
+            </div>
           </div>
-          
-        </div>
-      ))}
+        ))
+      )}
     </div>
   );
 };
