@@ -8,6 +8,8 @@ interface Article {
   source: string;
   year: number;
   doi: string;
+  claim: string
+  evidence_level: string;
   summary: string;
 }
 
@@ -30,11 +32,13 @@ const Articles = () => {
       {articles.map((article) => (
         <div className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap" key={article._id}>
           <h3 className="font-bold text-xl mb-2">{article.title}</h3>
-          <p>{article.authors.join(', ')}</p>
-          <p>{article.source}</p>
-          <p>{article.year}</p>
-          <p>{article.doi}</p>
-          <p>{article.summary}</p>
+          <p><b>Authors: </b> {article.authors.join(', ')}</p>
+          <p><b>Source: </b>{article.source}</p>
+          <p><b>Year: </b> {article.year}</p>
+          <p><b>DOI: </b> {article.doi}</p>
+          <p><b>Claim: </b> {article.claim}</p>
+          <p><b>Evidence Level: </b> {article.evidence_level}</p>
+          <p><b>Summary: </b> {article.summary}</p>
         </div>
       ))}
     </div>
