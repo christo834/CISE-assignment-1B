@@ -114,6 +114,8 @@ export class ArticleService {
     return articles;
   }
 
+  
+
   async getUnmoderatedArticles(): Promise<Article[]> {
     const articles = await this.articleModel
       .find({ moderated: 'false' })
@@ -136,4 +138,13 @@ export class ArticleService {
     await article.save();
     return article;
   }
+
+  async deleteArticle(id: string) {
+    const result = await this.articleModel.findByIdAndRemove(id);
+    if (!result) {
+      throw new NotFoundException('Article not found');
+    }
+    return result;
+  }
+  
 }

@@ -39,6 +39,34 @@ const Admin = () => {
     }
   }
 
+  const handleDelete = async (id: string) => {
+    const confirmation = await swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this article!",
+      icon: "warning",
+      buttons: ["No", "Yes"],
+      dangerMode: true,
+    });
+  
+    if (confirmation) {
+      try {
+        const response = await fetch(`http://localhost:8000/article/${id}`, {
+          method: 'DELETE',
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to delete article');
+        }
+  
+        swal("Success", "Article deleted successfully", "success");
+        fetchArticles();
+      } catch (error) {
+        swal("Error", (error as Error).message, "error");
+      }
+    }
+  };
+  
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       Modal.setAppElement('#__next');
@@ -104,6 +132,9 @@ const Admin = () => {
               <button className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded" onClick={() => handleEdit(article)}>
                 Edit
               </button>
+              <button className="bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(article._id)}>
+    Delete
+  </button>
             </div>
           </div>
         ))

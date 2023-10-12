@@ -7,6 +7,7 @@ import {
   Request,
   Param,
   Put,
+  Delete,
 } from '@nestjs/common';
 
 import { ArticleService } from './article.service';
@@ -52,6 +53,7 @@ export class ArticleController {
       articleTitle: result.title,
     };
   }
+
 
   //vist http://localhost:8000/article/hello
   @Get('/hello')
@@ -248,4 +250,13 @@ export class ArticleController {
       article: updatedArticle,
     };
   }
+
+  @Delete('/:id')
+  async deleteArticle(@Param('id') id: string) {
+  const deletedArticle = await this.articleService.deleteArticle(id);
+  return {
+    msg: 'Article deleted successfully',
+    article: deletedArticle,
+  };
+}
 }
