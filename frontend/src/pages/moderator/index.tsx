@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import "../../styles/table.css"
 import swal from 'sweetalert';
 import { SpinnerInfinity } from 'spinners-react';
+import withAuth from '@/hoc/withAuth';
+import useAuth from '@/hooks/useAuth';
 
 interface Moderator {
   _id: string;
@@ -18,6 +20,7 @@ const Moderator = () => {
   const [articles, setArticles] = useState<Moderator[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const token = useAuth();
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -121,4 +124,4 @@ const Moderator = () => {
   );
 };
 
-export default Moderator;
+export default withAuth(Moderator)

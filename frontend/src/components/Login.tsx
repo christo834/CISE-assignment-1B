@@ -2,39 +2,40 @@ import { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import { useRouter } from "next/router";
+import "@/app/globals.css";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8000/auth/login", {
-        username,
-        password,
-      });
-
-      // Store the token and user's role in local storage
-      localStorage.setItem("token", response.data.access_token);
-      localStorage.setItem("role", response.data.role);
-
-      // Log the role
-      console.log(response.data.role);
+      const response = await axios.post(
+        "http://localhost:8000/auth/login",
+        {
+          username,
+          password,
+        },
+        { withCredentials: true }
+      );
 
       // Show Swal success alert
       swal({
         title: "Success",
         text: "You are now logged in!",
         icon: "success",
-      }).then(() => {
-        // Redirect to /articles/new and refresh the page
-        router.push("/articles/new");
+      }).then(async () => {
+        // Wait for getInitialProps to finish before navigating to "/admin"
+        await router.push("/");
       });
     } catch (error) {
       // Show Swal error alert
+      console.error("Error during redirection:", error);
+
       swal({
         title: "Error",
         text: "An error occurred during login. Please try again.",
@@ -42,8 +43,9 @@ export default function Login() {
       });
     }
   };
+
   return (
-    <div className="w-full max-w-xs flex-col mx-auto">
+    <div className="w-full max-w-xs flex-col mx-auto mt-20">
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit}

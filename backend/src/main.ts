@@ -3,11 +3,12 @@ import { AppModule } from './app.module';
 import * as dotenv from 'dotenv';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true }); //cors to true
+  const app = await NestFactory.create(AppModule); //cors to true
   app.enableCors({
-    origin: '*',
+    origin: 'http://localhost:3000',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders: 'Content-Type, Accept',
+    allowedHeaders: 'Content-Type, Accept, Authorization',
+    credentials: true,
   });
 
   dotenv.config();

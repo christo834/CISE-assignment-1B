@@ -3,6 +3,8 @@ import "../../styles/table.css"
 import swal from 'sweetalert';
 import { SpinnerInfinity } from 'spinners-react';
 import Modal from 'react-modal';
+import withAuth from '@/hoc/withAuth';
+import useAuth from '@/hooks/useAuth';
 
 interface Article {
   _id: string;
@@ -18,11 +20,14 @@ interface Article {
   evidence_level: string;
 }
 
+
 const Analyst = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [editingArticle, setEditingArticle] = useState<Partial<Article>>({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const token = useAuth();
 
   const fetchArticles = async () => {
     try {
@@ -171,4 +176,4 @@ const Analyst = () => {
   );
 };
 
-export default Analyst;
+export default withAuth(Analyst);

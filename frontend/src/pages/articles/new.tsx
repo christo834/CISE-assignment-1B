@@ -1,6 +1,7 @@
 import { FormEvent, useState, useEffect } from "react";
 import formStyles from "../../styles/Form.module.scss";
 import swal from "sweetalert";
+import withAuth from "@/hoc/withAuth";
 
 const NewDiscussion = () => {
   const [title, setTitle] = useState("");
@@ -205,4 +206,4 @@ const NewDiscussion = () => {
     </div>
   );
 };
-export default NewDiscussion;
+export default withAuth(NewDiscussion)

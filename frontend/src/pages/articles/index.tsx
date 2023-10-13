@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import "../../styles/table.css"
+import withAuth from '@/hoc/withAuth';
 
 interface Article {
   _id: string;
@@ -12,6 +13,7 @@ interface Article {
   evidence_level: string;
   summary: string;
 }
+
 
 const Articles = () => {
   const [articles, setArticles] = useState<Article[]>([]);
