@@ -30,7 +30,7 @@ export default function Login() {
         icon: "success",
       }).then(async () => {
         // Wait for getInitialProps to finish before navigating to "/admin"
-        await router.push("/");
+        await router.push("/articles/new");
       });
     } catch (error) {
       // Show Swal error alert

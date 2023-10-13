@@ -16,7 +16,7 @@ const withAuth = (Component: NextPage) => {
         const cookies = parseCookies();
         const token = cookies["token"];
         if (!token) {
-          router.push("/");
+          router.push("/login");
         }
       };
       checkAuth();
