@@ -142,13 +142,28 @@ const Analyst = () => {
             <h3 className="font-bold text-xl text-wrap mb-2">
               {article.title}
             </h3>
-            <p>Authors: {article.authors.join(", ")}</p>
-            <p>Source: {article.source}</p>
-            <p>Year: {article.year}</p>
+            <p>
+              <div className="text-yellow-500">Authors:</div>{" "}
+              {article.authors.join(", ")}
+            </p>
+            <p>
+              <div className="text-yellow-500">Source: </div>
+              {article.source}
+            </p>
+            <p>
+              <div className="text-yellow-500">Year:</div> {article.year}
+            </p>
             <p className="italic">{article.doi}</p>
-            <p>Claim: {article.claim}</p>
-            <p>Evidence Level: {article.evidence_level}</p>
-            <p>Summary: {article.summary}</p>
+            <p>
+              <div className="text-yellow-500">Claim:</div> {article.claim}
+            </p>
+            <p>
+              <div className="text-yellow-500">Evidence Level:</div>{" "}
+              {article.evidence_level}
+            </p>
+            <p>
+              <div className="text-yellow-500">Summary:</div> {article.summary}
+            </p>
 
             <div className="flex justify-between mt-4">
               <button
