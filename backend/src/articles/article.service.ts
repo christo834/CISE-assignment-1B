@@ -55,6 +55,20 @@ export class ArticleService {
     return article;
   }
 
+  async updateAnalysedStatus(_id: string, inputAnalysed: string) {
+    const article = await this.articleModel.findById(_id);
+    if (!article) {
+      throw new NotFoundException('Article not found');
+    }
+
+    console.log('Before:', article);
+    article.analysed = inputAnalysed; // Update the 'moderated' field
+    article.markModified('analysed');
+    console.log('After:', article);
+    await article.save();
+    return article;
+  }
+
   //get one article, search via doi
   async getUser(doi: string) {
     const article = await this.articleModel.findOne({ doi });

@@ -13,12 +13,12 @@ interface Article {
   doi: string;
   summary: string;
   moderated: string;
-  analysed: string;
   claim: string;
+  analysed: string;
   evidence_level: string;
 }
 
-const Admin = () => {
+const Analyst = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [editingArticle, setEditingArticle] = useState<Partial<Article>>({});
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,7 +28,7 @@ const Admin = () => {
     try {
       setLoading(true);
 
-      const response = await fetch('https://cise-backend-5103.vercel.app/article/all');
+      const response = await fetch('https://cise-backend-5103.vercel.app/article/moderated');
       if (!response.ok) {
         throw new Error('Failed to fetch');
       }
@@ -56,11 +56,38 @@ const Admin = () => {
     setIsModalOpen(true);
   };
 
+  const handleSetAnalysedTrue = async (id: string) => {
+    const article = articles.find(article => article._id === id);
+    if (article && article.analysed === 'true') {
+      swal("Info", "This article has already been approved", "info");
+      return;
+    }
+
+    //CHANGE TO VERCEL LINK
+    //https://cise-backend-5103.vercel.app/article/analysed/${editingArticle._id}/true
+    const response = await fetch(`https://cise-backend-5103.vercel.app/article/analysed/${id}/true`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      const updatedArticles = articles.map(article =>
+        article._id === id ? { ...article, analysed: 'true' } : article
+      );
+      setArticles(updatedArticles);
+      swal("Success", "Article analysed successfully", "success");
+    } else {
+      swal("Error", "Failed to analyse the article", "error");
+    }
+  };
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
     try {
-      const response = await fetch(`https://cise-backend-5103.vercel.app/article/${editingArticle._id}`, {
+      //CHANGE TO VERCEL LINK ABOVE
+      //https://cise-backend-5103.vercel.app/article/${editingArticle._id}
+      const response = await fetch(`http://cise-backend-5103.vercel.app/article/${editingArticle._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -74,7 +101,6 @@ const Admin = () => {
   
       const updatedArticle = await response.json();
       console.log(updatedArticle);
-  
       swal("Success", "Article updated successfully", "success");
       setIsModalOpen(false);
   
@@ -84,8 +110,8 @@ const Admin = () => {
     } catch (error) {
       swal("Error", (error as Error).message, "error");
     }
+    handleSetAnalysedTrue(editingArticle._id as string);
   };
-  
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 border-white m-6">
@@ -97,11 +123,13 @@ const Admin = () => {
         articles.map((article) => (
           <div className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap my-4 " key={article._id}>
             <h3 className="font-bold text-xl text-wrap mb-2">{article.title}</h3>
-            <p>{article.authors.join(', ')}</p>
-            <p>{article.source}</p>
-            <p>{article.year}</p>
+            <p>Authors: {article.authors.join(', ')}</p>
+            <p>Source: {article.source}</p>
+            <p>Year: {article.year}</p>
             <p className='italic'>{article.doi}</p>
-            <p>{article.summary}</p>
+            <p>Claim: {article.claim}</p>
+    <p>Evidence Level: {article.evidence_level}</p>
+            <p>Summary: {article.summary}</p>
 
             <div className="flex justify-between mt-4">
               <button className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded" onClick={() => handleEdit(article)}>
@@ -111,7 +139,6 @@ const Admin = () => {
           </div>
         ))
       )}
-
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
@@ -124,32 +151,6 @@ const Admin = () => {
             <h2 className="text-lg leading-6 font-medium text-gray-900 mb-2">Edit Article</h2>
             <form onSubmit={handleSubmit}>
               <label className="block text-gray-700">
-                Title:
-                <input type="text" value={editingArticle.title || ''} onChange={e => setEditingArticle({ ...editingArticle, title: e.target.value })} className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4" />
-              </label>
-              <label className="block mt-3 text-gray-700">
-                Authors:
-                <input type="text" value={editingArticle.authors?.join(', ') || ''} onChange={e => setEditingArticle({ ...editingArticle, authors: e.target.value.split(', ') })} className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4" />
-              </label>
-              <label className="block text-gray-700">
-                source:
-                <input type="text" value={editingArticle.source || ''} onChange={e => setEditingArticle({ ...editingArticle, source: e.target.value })} className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4" />
-              </label>
-              <label className="block text-gray-700">
-                doi:
-                <input type="text" value={editingArticle.doi || ''} onChange={e => setEditingArticle({ ...editingArticle, doi: e.target.value })} className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4" />
-              </label>
-              <label className="block text-gray-700">
-                summary:
-                <input type="text" value={editingArticle.summary || ''} onChange={e => setEditingArticle({ ...editingArticle, summary: e.target.value })} className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4" />
-              </label>
-              <label className="block text-gray-700">
-                year:
-                <input type="number" value={editingArticle.year || ''} onChange={e => setEditingArticle({ ...editingArticle, year: parseInt(e.target.value) })} className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4" />
-
-              </label>
-
-              <label className="block text-gray-700">
                 Claim:
                 <input type="text" value={editingArticle.claim || ''} onChange={e => setEditingArticle({ ...editingArticle, claim: e.target.value })} className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4" />
               </label>
@@ -157,8 +158,6 @@ const Admin = () => {
                 Evidence Level:
                 <input type="text" value={editingArticle.evidence_level || ''} onChange={e => setEditingArticle({ ...editingArticle, evidence_level: e.target.value })} className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4" />
               </label>
-              
-              {/* Add more fields as necessary */}
               <div className="mt-5 sm:mt-6">
                 <button type="submit" className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm">
                   Save
@@ -172,5 +171,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
-
+export default Analyst;
