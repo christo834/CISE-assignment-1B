@@ -13,6 +13,8 @@ interface Article {
   doi: string;
   summary: string;
   moderated: string;
+  nalysed: string;
+  evidence_level: string;
 }
 
 const Admin = () => {
@@ -92,7 +94,7 @@ const Admin = () => {
         </div>  
       ) : (
         articles.map((article) => (
-          <div className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap my-4 " key={article._id}>
+          <div className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap " key={article._id}>
             <h3 className="font-bold text-xl text-wrap mb-2">{article.title}</h3>
             <p>{article.authors.join(', ')}</p>
             <p>{article.source}</p>
@@ -144,6 +146,15 @@ const Admin = () => {
                 year:
                 <input type="number" value={editingArticle.year || ''} onChange={e => setEditingArticle({ ...editingArticle, year: parseInt(e.target.value) })} className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4" />
 
+              </label>
+
+              <label className="block text-gray-700">
+                Claim:
+                <input type="text" value={editingArticle.claim || ''} onChange={e => setEditingArticle({ ...editingArticle, claim: e.target.value })} className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4" />
+              </label>
+              <label className="block mt-3 text-gray-700">
+                Evidence Level:
+                <input type="text" value={editingArticle.evidence_level || ''} onChange={e => setEditingArticle({ ...editingArticle, evidence_level: e.target.value })} className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4" />
               </label>
               
               {/* Add more fields as necessary */}
