@@ -47,6 +47,9 @@ const Moderator = () => {
       swal("Info", "This article has already been approved", "info");
       return;
     }
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
 
     const response = await fetch(
       `https://cise-backend-5103.vercel.app/article/${id}/true`,
