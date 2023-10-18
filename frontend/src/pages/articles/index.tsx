@@ -36,26 +36,28 @@ const Articles = () => {
         >
           <h3 className="font-bold text-xl mb-2">{article.title}</h3>
           <p>
-            <b>Authors: </b> {article.authors.join(", ")}
+            <b className="text-yellow-500">Authors: </b>{" "}
+            {article.authors.join(", ")}
           </p>
           <p>
-            <b>Source: </b>
+            <b className="text-yellow-500">Source: </b>
             {article.source}
           </p>
           <p>
-            <b>Year: </b> {article.year}
+            <b className="text-yellow-500">Year: </b> {article.year}
           </p>
           <p>
-            <b>DOI: </b> {article.doi}
+            <b className="text-yellow-500">DOI: </b> {article.doi}
           </p>
           <p>
-            <b>Claim: </b> {article.claim}
+            <b className="text-yellow-500">Claim: </b> {article.claim}
           </p>
           <p>
-            <b>Evidence Level: </b> {article.evidence_level}
+            <b className="text-yellow-500">Evidence Level: </b>{" "}
+            {article.evidence_level}
           </p>
           <p>
-            <b>Summary: </b> {article.summary}
+            <b className="text-yellow-500">Summary: </b> {article.summary}
           </p>
         </div>
       ))}
