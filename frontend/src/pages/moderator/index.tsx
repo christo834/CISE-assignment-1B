@@ -41,6 +41,7 @@ const Moderator = () => {
 
     fetchArticles();
   }, []);
+
   const handleSetModeratorTrue = async (id: string) => {
     const article = articles.find((article) => article._id === id);
     if (article && article.moderated === "true") {
@@ -78,6 +79,9 @@ const Moderator = () => {
       swal("Info", "This article has already been disapproved", "info");
       return;
     }
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
 
     const response = await fetch(
       `https://cise-backend-5103.vercel.app/article/${id}/false`,
@@ -99,6 +103,7 @@ const Moderator = () => {
       swal("Error", "Failed to disapprove the article", "error");
     }
   };
+
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 border-white">
