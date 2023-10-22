@@ -26,4 +26,11 @@ describe('ArticleController', () => {
             expect(controller.getByID('651fd55d6017d54a330cc61e')).toStrictEqual(test);
         });
     });
+
+    describe('GetByName', () => {
+        it("Goal: See if function returns entry with a title of An experimental evaluation of test driven development vs. test-last development with industry professionals", () => {
+            const test = controller.getArticleByTitle('An experimental evaluation of test driven development vs. test-last development with industry professionals');
+            expect(controller.getArticleByTitle('An experimental evaluation of test driven development vs. test-last development with industry professionals')).toStrictEqual(test);
+        });
+    });
 });
