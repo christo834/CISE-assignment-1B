@@ -68,7 +68,7 @@ const Analyst = () => {
     //CHANGE TO VERCEL LINK
     //https://cise-backend-5103.vercel.app/article/analysed/${editingArticle._id}/true
     const response = await fetch(
-      `https://cise-backend-5103.vercel.app/article/analysed/${id}/true`,
+      `https://cise-backend-5103.vercel.app/article/analysed/${editingArticle._id}/true`,
       {
         method: "POST",
         headers: {
@@ -93,7 +93,7 @@ const Analyst = () => {
       //CHANGE TO VERCEL LINK ABOVE
       //https://cise-backend-5103.vercel.app/article/${editingArticle._id}
       const response = await fetch(
-        `http://cise-backend-5103.vercel.app/article/${editingArticle._id}`,
+        `https://cise-backend-5103.vercel.app/article/${editingArticle._id}`,
         {
           method: "PUT",
           headers: {
@@ -106,6 +106,10 @@ const Analyst = () => {
       if (!response.ok) {
         throw new Error("Failed to update article");
       }
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
 
       const updatedArticle = await response.json();
       console.log(updatedArticle);

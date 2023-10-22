@@ -84,6 +84,12 @@ export class ArticleService {
     return this.articleModel.find().exec();
   }
 
+  ß;
+  //show all articles that have been analysed to true
+  async findAnalysedArticles(): Promise<Article[]> {
+    return this.articleModel.find({ analysed: 'true' }).exec();
+  }
+
   //get one article, search via title
   async getArticleByTitle(title: string) {
     const article = await this.articleModel.findOne({ title });
@@ -111,13 +117,13 @@ export class ArticleService {
 
   async getUnmoderatedArticles(): Promise<Article[]> {
     const articles = await this.articleModel
-      .find({ moderated: 'false' })
+      .find({ moderated: '0' })
       .exec();
     return articles;
   }
 
   async getModeratedArticles(): Promise<Article[]> {
-    const articles = await this.articleModel.find({ moderated: 'true' }).exec();
+    const articles = await this.articleModel.find({ moderated: 'true', analysed: '0' }).exec();
     return articles;
   }
 

@@ -133,6 +133,14 @@ const Admin = () => {
               {article.summary}
             </p>
 
+            <p>
+              <div className="text-yellow-500">Claim:</div> {article.claim}
+            </p>
+            <p>
+              <div className="text-yellow-500">Evidence Level:</div>{" "}
+              {article.evidence_level}
+            </p>
+
             <div className="flex justify-between mt-4">
               <button
                 className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"
