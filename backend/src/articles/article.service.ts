@@ -75,10 +75,13 @@ export class ArticleService {
     return article;
   }
 
+  //get one article by its ID
   async getByID(_id: string) {
     const article = await this.articleModel.findById(_id);
     return article;
   }
+
+  
   //show all articles in database
   async findAll(): Promise<Article[]> {
     return this.articleModel.find().exec();
@@ -109,6 +112,7 @@ export class ArticleService {
     return articles;
   }
 
+  //get articles that have moderated as false
   async getUnmoderatedArticles(): Promise<Article[]> {
     const articles = await this.articleModel
       .find({ moderated: 'false' })
@@ -116,6 +120,8 @@ export class ArticleService {
     return articles;
   }
 
+
+  //get articles that have moderated as true
   async getModeratedArticles(): Promise<Article[]> {
     const articles = await this.articleModel.find({ moderated: 'true' }).exec();
     return articles;
