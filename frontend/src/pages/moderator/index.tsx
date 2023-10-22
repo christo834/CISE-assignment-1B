@@ -12,6 +12,9 @@ interface Moderator {
   doi: string;
   summary: string;
   moderated: string;
+  claim: string;
+  evidence_level: string;
+  analysed: string;
 }
 
 const Moderator = () => {
@@ -24,7 +27,7 @@ const Moderator = () => {
         setLoading(true);
 
         const response = await fetch(
-          "https://cise-backend-5103.vercel.app/article/all"
+          "https://cise-backend-5103.vercel.app/article/unmoderated"
         );
         if (!response.ok) {
           throw new Error("Failed to fetch");
@@ -103,7 +106,6 @@ const Moderator = () => {
       swal("Error", "Failed to disapprove the article", "error");
     }
   };
-
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 border-white">
