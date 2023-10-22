@@ -147,7 +147,7 @@ export class ArticleController {
     };
   }
 
-    // Add this new endpoint to your ArticleController
+  // Add this new endpoint to your ArticleController
   //visit http://localhost:8000/article/analysed/:id/:analysed
   @Post('/analysed/:id/:analysed')
   async updateAnalysedStatus(
@@ -199,6 +199,23 @@ export class ArticleController {
     }
   }
 
+  //For getting analysed articles
+  //visit http://localhost:8000/article/moderated
+  @Get('/analysed')
+  async GetAnalyesdArticles() {
+    const articles = await this.articleService.findAnalysedArticles();
+    if (articles.length > 0) {
+      return {
+        msg: 'Moderated articles found successfully',
+        articles: articles,
+      };
+    } else {
+      return {
+        msg: 'No moderated articles found',
+      };
+    }
+  }
+
   //Getting article by inputting the ID
   //visit //http://localhost:8000/article/:_id
   @Get('/:_id')
@@ -229,5 +246,5 @@ export class ArticleController {
       msg: 'Article updated successfully',
       article: updatedArticle,
     };
-  } 
+  }
 }
