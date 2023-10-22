@@ -16,6 +16,7 @@ interface Article {
   claim: string;
   analysed: string;
   evidence_level: string;
+  se_methods: string;
 }
 
 const Analyst = () => {
@@ -224,6 +225,20 @@ const Analyst = () => {
                     setEditingArticle({
                       ...editingArticle,
                       evidence_level: e.target.value,
+                    })
+                  }
+                  className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4"
+                />
+              </label>
+              <label className="block mt-3 text-gray-700">
+                SE method:
+                <input
+                  type="text"
+                  value={editingArticle.se_methods || ""}
+                  onChange={(e) =>
+                    setEditingArticle({
+                      ...editingArticle,
+                      se_methods: e.target.value,
                     })
                   }
                   className="mt-1 block w-full rounded-md shadow-sm sm:text-sm border-gray-300 p-4"

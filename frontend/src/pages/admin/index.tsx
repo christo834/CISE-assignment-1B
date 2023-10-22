@@ -195,7 +195,7 @@ const Admin = () => {
                 />
               </label>
               <label className="block text-gray-700">
-                source:
+                Source:
                 <input
                   type="text"
                   value={editingArticle.source || ""}
@@ -223,7 +223,7 @@ const Admin = () => {
                 />
               </label>
               <label className="block text-gray-700">
-                summary:
+                Summary:
                 <input
                   type="text"
                   value={editingArticle.summary || ""}
@@ -237,7 +237,7 @@ const Admin = () => {
                 />
               </label>
               <label className="block text-gray-700">
-                year:
+                Year:
                 <input
                   type="number"
                   value={editingArticle.year || ""}
