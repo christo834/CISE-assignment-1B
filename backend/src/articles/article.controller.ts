@@ -128,24 +128,6 @@ export class ArticleController {
       };
     }
   }
-  ß;
-
-  //visit http://localhost:8000/article/analysed
-  @Get('/analysed')
-  async getAllAnalysedArticles() {
-    const articles = await this.articleService.findAnalysedArticles();
-    if (articles.length > 0) {
-      return {
-        msg: 'Articles found successfully',
-        articles: articles,
-        anaylsed: true,
-      };
-    } else {
-      return {
-        msg: 'No articles found',
-      };
-    }
-  }
 
   // Add this new endpoint to your ArticleController
   //visit http://localhost:8000/article/:id/:moderated
@@ -247,5 +229,5 @@ export class ArticleController {
       msg: 'Article updated successfully',
       article: updatedArticle,
     };
-  }
+  } 
 }

@@ -15,12 +15,13 @@ interface Article {
 
 const Articles = () => {
   const [articles, setArticles] = useState<Article[]>([]);
+
   //searches for true articles
   useEffect(() => {
     const fetchArticles = async () => {
       const response = await fetch("http://localhost:8000/article/analysed");
-      const data = await response.json();
 
+      const data = await response.json();
       setArticles(data.articles);
     };
 

@@ -20,10 +20,8 @@ const ArticleDetails = () => {
       let response;
       if (searchType === "method") {
         response = await fetch(
-          
-          //NEED TO MODIFY THE CONTROLLER ON MAIN BRANCH BASED ON FEAT BRANCH, it is working now at feat/search-article-by-method
-          //`https://cise-backend-5103.vercel.app/article/se_method/${method}`
-          `http://localhost:8000/article/se_method/${method}` //temporary local fix, for testing purposes
+          //`http://localhost:8000/article/se_method/${method}`
+          `https://cise-backend-5103.vercel.app/article/se_method/${method}`
         );
       } else if (searchType === "title") {
         response = await fetch(
