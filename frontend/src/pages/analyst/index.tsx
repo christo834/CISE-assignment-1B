@@ -143,11 +143,10 @@ const Analyst = () => {
             secondaryColor="rgba(57, 172, 151, 0.44)"
           />
         </div>
-      ) : (
-        articles &&
+      ) : articles && articles.length > 0 ? (
         articles.map((article) => (
           <div
-            className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap my-4 "
+            className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap my-4"
             key={article._id}
           >
             <h3 className="font-bold text-xl text-wrap mb-2">
@@ -186,7 +185,10 @@ const Analyst = () => {
             </div>
           </div>
         ))
+      ) : (
+        <div className="text-white">No articles to be analysed</div>
       )}
+
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
