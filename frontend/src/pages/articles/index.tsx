@@ -19,7 +19,9 @@ const Articles = () => {
   //searches for true articles
   useEffect(() => {
     const fetchArticles = async () => {
-      const response = await fetch("http://localhost:8000/article/analysed");
+      const response = await fetch(
+        "https://cise-backend-5103.vercel.app/article/analysed"
+      );
 
       const data = await response.json();
       setArticles(data.articles);
