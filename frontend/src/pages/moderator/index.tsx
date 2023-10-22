@@ -120,6 +120,7 @@ const Moderator = () => {
           />
         </div>
       ) : (
+        articles &&
         articles.map((article) => (
           <div
             className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap my-4 "

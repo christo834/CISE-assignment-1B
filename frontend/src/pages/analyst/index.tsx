@@ -65,6 +65,10 @@ const Analyst = () => {
       return;
     }
 
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
+
     //CHANGE TO VERCEL LINK
     //https://cise-backend-5103.vercel.app/article/analysed/${editingArticle._id}/true
     const response = await fetch(
@@ -89,9 +93,14 @@ const Analyst = () => {
   };
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    // Check if all fields are filled
+    if (!editingArticle.claim || !editingArticle.evidence_level) {
+      swal("Error", "All fields must be filled", "error");
+      return;
+    }
+
     try {
-      //CHANGE TO VERCEL LINK ABOVE
-      //https://cise-backend-5103.vercel.app/article/${editingArticle._id}
       const response = await fetch(
         `https://cise-backend-5103.vercel.app/article/${editingArticle._id}`,
         {
@@ -106,10 +115,6 @@ const Analyst = () => {
       if (!response.ok) {
         throw new Error("Failed to update article");
       }
-
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
 
       const updatedArticle = await response.json();
       console.log(updatedArticle);
@@ -138,6 +143,7 @@ const Analyst = () => {
           />
         </div>
       ) : (
+        articles &&
         articles.map((article) => (
           <div
             className="rounded overflow-hidden shadow-lg p-4 text-white border-white border-2 text-wrap my-4 "
