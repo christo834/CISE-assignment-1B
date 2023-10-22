@@ -24,26 +24,29 @@ const NewDiscussion = () => {
     // Your fetch logic here
     //https://cise-backend-5103.vercel.app/article/submit remember to put below before comit
     try {
-      const response = await fetch("https://cise-backend-5103.vercel.app/article/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title,
-          authors,
-          source,
-          year: pubYear,
-          doi,
-          summary,
-          analysed,
-          moderated,
-          claim,
-          evidence_level,
-          se_methods,
-          //linked_discussion: linkedDiscussion,
-        }),
-      });
+      const response = await fetch(
+        "https://cise-backend-5103.vercel.app/article/submit",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title,
+            authors,
+            source,
+            year: pubYear,
+            doi,
+            summary,
+            analysed,
+            moderated,
+            claim,
+            evidence_level,
+            se_methods,
+            //linked_discussion: linkedDiscussion,
+          }),
+        }
+      );
 
       if (response.ok) {
         const responseData = await response.json();
@@ -54,7 +57,11 @@ const NewDiscussion = () => {
       } else {
         const errorData = await response.json();
         await setResponseMessage(errorData.message);
-        await swal("Failed", "Article submission unsuccessful", "error");
+        await swal(
+          "Missing Details",
+          "Please compelete all details",
+          "warning"
+        );
         console.error("Failed to submit article");
         // Handle the error here
       }

@@ -52,7 +52,11 @@ const ArticleDetails = () => {
           swal("No results", "No results found for your search", "info");
         }
       } else {
-        swal("Failed", "Failed to fetch results", "error");
+        swal(
+          "Search Filter Required ",
+          "Please input the search filters",
+          "warning"
+        );
       }
     } catch (error) {
       swal("Error", "Please try again", "error");
