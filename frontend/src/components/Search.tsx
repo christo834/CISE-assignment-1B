@@ -159,11 +159,32 @@ const ArticleDetails = () => {
             return (
               <div key={result._id} className="border p-4 rounded">
                 <h1 className="font-bold">{result.title}</h1>
-                <h2>Authors: {result.authors.join(", ")}</h2>
-                <p>Source: {result.source}</p>
-                <p>Publication Year: {result.year}</p>
-                <p>DOI: {result.doi}</p>
-                <p>Summary: {result.summary}</p>
+                <h2>
+                  <span className="text-yellow-500">Authors:</span>{" "}
+                  {result.authors.join(", ")}
+                </h2>
+                <p>
+                  <span className="text-yellow-500">Source:</span>{" "}
+                  {result.source}
+                </p>
+                <p>
+                  <span className="text-yellow-500">Publication Year:</span>{" "}
+                  {result.year}
+                </p>
+                <p>
+                  <span className="text-yellow-500">DOI:</span> {result.doi}
+                </p>
+                <p>
+                  <span className="text-yellow-500">Claim:</span> {result.claim}
+                </p>
+                <p>
+                  <span className="text-yellow-500">Evidence:</span>{" "}
+                  {result.evidence_level}
+                </p>
+                <p>
+                  <span className="text-yellow-500">Summary:</span>{" "}
+                  {result.summary}
+                </p>
               </div>
             );
           })}
